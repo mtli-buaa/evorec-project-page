@@ -5,14 +5,14 @@
   <meta name="description" content="EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees">
   <title>EvoRec | Self-Evolving Agentic Recommendation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-20">
-  <style>.reasoning-canvas[data-stage="0"] .need-cluster,.reasoning-canvas[data-stage="0"] .inference-hub{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:scale(.88)!important}.contact-row{display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:9px;margin:-8px auto 20px}.contact-row>span{display:grid;place-items:center;padding:8px 13px;border-radius:13px;background:#edf2ff;color:#315fd5;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.contact-row a{display:grid;gap:1px;padding:8px 13px;border:1px solid #dfe5ef;border-radius:13px;background:#fff;color:#344054;text-align:left;text-decoration:none;font-size:12px;font-weight:650;line-height:1.35;box-shadow:0 5px 16px #23395d0d}.contact-row a small{color:#7b8798;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.kuaishou-watermark img{opacity:.18!important;filter:saturate(1.12) contrast(1.04)!important}@media(max-width:1180px){.kuaishou-watermark img{opacity:.15!important}}@media(max-width:700px){.contact-row{margin:-4px auto 18px;gap:7px}.contact-row>span{width:100%;padding:5px}.contact-row a{width:min(100%,350px);font-size:11px}}</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-21">
+  <style>.reasoning-canvas[data-stage="0"] .need-cluster,.reasoning-canvas[data-stage="0"] .inference-hub{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:scale(.88)!important}.kuaishou-watermark img{opacity:.18!important;filter:saturate(1.12) contrast(1.04)!important}@media(max-width:1180px){.kuaishou-watermark img{opacity:.15!important}}.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.contact-card{padding:22px 24px;border:1px solid #dfe5ef;border-radius:18px;background:linear-gradient(145deg,#fff,#f7f9fd);box-shadow:0 10px 28px #23395d10}.contact-card small{display:block;margin-bottom:5px;color:#315fd5;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.contact-card b{display:block;color:#263247;font-size:19px}.contact-card span{display:block;margin-top:5px;color:#657084;font-size:15px;font-weight:600}@media(max-width:700px){.contact-cards{grid-template-columns:1fr}.contact-card{padding:18px}.contact-card b{font-size:17px}.contact-card span{font-size:13px}}</style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div><div class="kuaishou-watermark" aria-hidden="true"><img src="https://static.yximgs.com/udata/pkg/frontend-explore/material-lib-www/pure-logo-1-min.png" alt=""></div>
   <nav class="section-nav" aria-label="Page sections">
-    <a href="#case-study">Case Study</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#bibtex-section">BibTeX</a>
+    <a href="#case-study">Case Study</a><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#contact">Contact</a><a href="#bibtex-section">BibTeX</a>
   </nav>
   <main class="page">
     <header class="hero">
@@ -21,7 +21,6 @@
       <p class="authors">Mengting Li<sup>*</sup>, Long Zhang<sup>*</sup>, Hao Jiang<sup>†</sup>, Sheng Yu, Fei Pan, Peng Jiang</p>
       <div class="affiliation"><b>Kuaishou Technology</b><small>Kuaishou Local Services Ads Recommendation Foundation Model Team</small></div>
       <p class="author-note"><sup>*</sup> Equal contribution &nbsp;·&nbsp; <sup>†</sup> Corresponding author</p>
-      <div class="contact-row" aria-label="Contact authors"><span>Contact</span><a href="mailto:mengtingli000@gmail.com"><small>First Author</small>Mengting Li · mengtingli000@gmail.com</a><a href="mailto:jianghao11@kuaishou.com"><small>Team Leader</small>Hao Jiang · jianghao11@kuaishou.com</a></div>
       <div class="links"><a href="paper.pdf" target="_blank" rel="noreferrer"><span>▤</span> Paper</a><span class="disabled"><span>⌘</span> Code</span></div>
     </header>
 
@@ -99,6 +98,7 @@
       <figure class="figure"><a href="assets/analysis-rounds.png" target="_blank" rel="noreferrer" aria-label="Open evolution-over-rounds analysis at full resolution"><img src="assets/analysis-rounds.png" alt="Relative Hit@50 gain over accumulation and evaluation rounds"></a><figcaption><b>Figure 5 · Evolution over rounds.</b> As verified reflective experience accumulates, EvoRec's relative Hit@50 gain grows to 2.9% by day D+4, while variants without tree evolution or ERROR-MEMORY plateau.</figcaption></figure>
     </section>
 
+    <section id="contact"><h2>Contact</h2><div class="contact-cards"><article class="contact-card"><small>First Author</small><b>Mengting Li</b><span>mengtingli000@gmail.com</span></article><article class="contact-card"><small>Team Leader</small><b>Hao Jiang</b><span>jianghao11@kuaishou.com</span></article></div></section>
 
     <section id="bibtex-section"><h2>BibTeX</h2><div class="bibtex"><button id="copy" type="button">Copy</button><pre id="bibtex">@misc{li2027evorec,
   title     = {EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees},
