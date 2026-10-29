@@ -251,7 +251,18 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 
 /* Three exact memory inputs; geometry is calculated from the live cards in site.js. */
 .need-paths .memory-input{stroke-width:3.2}
-.need-paths .long-input{stroke:var(--paper-green)}
-.need-paths .short-input{stroke:var(--paper-blue)}
-.need-paths .working-input{stroke:var(--paper-orange)}
+.reasoning-lines .need-paths .long-input{stroke:var(--paper-green)}
+.reasoning-lines .need-paths .short-input{stroke:var(--paper-blue)}
+.reasoning-lines .need-paths .working-input{stroke:var(--paper-orange)}
+
+/* Editorial contact note rather than separate profile cards. */
+.contact-note{position:relative;padding:27px 31px;border-left:4px solid #315fd5;border-radius:0 18px 18px 0;background:linear-gradient(115deg,#f5f8ff,#fbfcff 62%,#f3faf5);box-shadow:0 12px 34px #23395d10}
+.contact-note>p{max-width:820px;margin:0;color:#566276;font-size:16px;line-height:1.7}
+.contact-list{display:flex;flex-wrap:wrap;gap:20px 54px;margin-top:22px;padding-top:20px;border-top:1px solid #dce4f1}
+.contact-list>div{display:grid;grid-template-columns:auto auto;align-items:baseline;gap:3px 12px;min-width:300px}
+.contact-list small{grid-column:1 / -1;color:#315fd5;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.contact-list b{color:#263247;font-size:18px}
+.contact-list span{color:#657084;font-size:14px;font-weight:600}
+.contact-note .contact-team{margin-top:19px;color:#788396;font-size:12px;font-weight:700;letter-spacing:.02em}
+@media(max-width:700px){.contact-note{padding:22px 20px}.contact-note>p{font-size:14px}.contact-list{display:grid;gap:17px}.contact-list>div{grid-template-columns:1fr;gap:3px;min-width:0}.contact-list small{grid-column:auto}.contact-list b{font-size:17px}.contact-list span{font-size:13px;overflow-wrap:anywhere}}
 
