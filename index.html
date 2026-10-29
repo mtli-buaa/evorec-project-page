@@ -5,7 +5,7 @@
   <meta name="description" content="EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees">
   <title>EvoRec | Self-Evolving Agentic Recommendation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-12">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-13">
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
@@ -39,14 +39,15 @@
             <g class="result-paths"><path d="M620 375 C710 360 730 300 795 285"/><path d="M620 445 C710 440 730 390 795 365"/></g>
             <g class="reflect-paths"><path d="M850 400 C770 515 590 520 505 470"/></g>
           </svg>
-          <div class="graph-label memory-label">Behavior Sequence · newest first · click to inspect</div>
-          <div class="user-node"><div class="user-avatar"><span></span></div><b>Anonymized user</b><small>Working mother · Southwest China</small></div>
-          <button class="memory-node m1 relevant is-selected" type="button" data-icon="1" data-time="2026-09-14 22:07:35" data-action="P3S · Viewed ≥3s" data-sid="…9248" data-conversion="Lead submission" data-title="Debt relief through rapid-marriage service" data-detail="A rapid-marriage offer promises to settle debt below ¥100,000, provide a ¥188,000 bride price and related gifts, and turn over post-marriage wages. The video targets viewers facing debt pressure while seeking a partner."><span>09-14 22:07 · P3S · SID …9248</span><b>Debt relief through rapid-marriage service</b></button>
+          <div class="user-node long-term-memory"><div class="memory-type">Long-term Memory</div><div class="user-profile"><div class="user-avatar"><span></span></div><div><b>Anonymized user</b><small>Working mother · Southwest China</small></div></div><div class="profile-tags"><span>Local-service oriented</span><span>Price sensitive</span><span>Family decision maker</span></div></div>
+          <div class="working-memory"><div class="memory-type">Working Memory</div><b>Current recommendation episode</b><p>Goal: infer actionable local-service needs</p><div><span>Active evidence</span><strong>Recent P3S sequence</strong></div><div><span>Pending output</span><strong>Prioritized needs</strong></div></div>
+          <div class="graph-label memory-label"><b>Short-term Memory</b><span>Behavior sequence · newest first · click to inspect</span></div>
+          <button class="memory-node m1 relevant" type="button" data-icon="1" data-time="2026-09-14 22:07:35" data-action="P3S · Viewed ≥3s" data-sid="…9248" data-conversion="Lead submission" data-title="Debt relief through rapid-marriage service" data-detail="A rapid-marriage offer promises to settle debt below ¥100,000, provide a ¥188,000 bride price and related gifts, and turn over post-marriage wages. The video targets viewers facing debt pressure while seeking a partner."><span>09-14 22:07 · P3S · SID …9248</span><b>Debt relief through rapid-marriage service</b></button>
           <button class="memory-node m2 relevant" type="button" data-icon="2" data-time="2026-09-14 10:27:55" data-action="P3S · Viewed ≥3s" data-sid="…1578" data-conversion="Lead submission" data-title="Guidance for resolving a frozen bank card" data-detail="A professional explains why bank cards may be frozen and how to consult the bank, anti-fraud center, or relevant police department. The video highlights early unfreezing applications when the user did not knowingly participate in illegal activity."><span>09-14 10:27 · P3S · SID …1578</span><b>Guidance for resolving a frozen bank card</b></button>
           <button class="memory-node m3 relevant" type="button" data-icon="3" data-time="2026-09-13 15:28:58" data-action="P3S · Viewed ≥3s" data-sid="…2555" data-conversion="Lead submission" data-title="Used-car trade-in and subsidy information" data-detail="A presenter demonstrates a used-car trade-in and explains new-car pricing, manufacturer subsidies, national subsidies, and residual-value calculation, directing interested buyers to a local dealer."><span>09-13 15:28 · P3S · SID …2555</span><b>Used-car trade-in and subsidy information</b></button>
           <button class="memory-node m4 relevant" type="button" data-icon="4" data-time="2026-09-13 13:40:38" data-action="P3S · Viewed ≥3s" data-sid="…4203" data-conversion="Effective acquisition" data-title="Professional marriage-law consultation" data-detail="A legal-services video warns that fragmented online divorce advice can be confusing or inaccurate and recommends personalized guidance from a marriage-law professional."><span>09-13 13:40 · P3S · SID …4203</span><b>Professional marriage-law consultation</b></button>
           <button class="memory-node m5 relevant" type="button" data-icon="5" data-time="2026-09-13 00:16:24" data-action="P3S · Viewed ≥3s" data-sid="…3728" data-conversion="Lead submission" data-title="Eye-care and cosmetic treatment process" data-detail="A beauty-clinic video shows an eye-care and contouring procedure, including professional tools, treatment steps, and the intended visual effect, for viewers interested in cosmetic eye treatment."><span>09-13 00:16 · P3S · SID …3728</span><b>Eye-care and cosmetic treatment process</b></button>
-          <aside class="behavior-detail" id="behavior-detail" aria-live="polite">
+          <aside class="behavior-detail is-hidden" id="behavior-detail" aria-live="polite">
             <div class="behavior-detail-head"><span>Behavior detail</span><button type="button" id="behavior-detail-close" aria-label="Close behavior detail">×</button></div>
             <h3 id="behavior-detail-title">Debt relief through rapid-marriage service</h3>
             <dl><div><dt>Time</dt><dd id="behavior-detail-time">2026-09-14 22:07:35</dd></div><div><dt>Behavior</dt><dd id="behavior-detail-action">P3S · Viewed ≥3s</dd></div><div><dt>SID</dt><dd id="behavior-detail-sid">…9248</dd></div><div><dt>Conversion</dt><dd id="behavior-detail-conversion">Lead submission</dd></div></dl>
@@ -69,7 +70,7 @@
           <div class="planner-node"><span>Plan Agent</span><b>Allocate budget</b><small>BC 60% · NS 40%</small></div>
           <div class="result-list"><div class="graph-label">Recall outcome</div><ol><li><span>BC</span><b>1,800 candidates</b><em>Success</em></li><li><span>NS</span><b>1,200 candidates</b><em>Success</em></li><li><span>Σ</span><b>3,000 returned</b><em>Merged</em></li><li class="ellipsis">···</li><li class="target"><span class="target-rank">×</span><b>Deposit-free phone rental</b><em class="not-recalled">Missed by both routes</em><em class="replayed">Repair pending</em></li></ol></div>
           <div class="reflection-cluster"><span>ERROR-NEED-001</span><b>Evidence present but omitted</b><strong>Missing need: low-threshold phone rental</strong><small>Repair: jointly model cash-flow pressure, price sensitivity, and durable-goods acquisition.</small><em>Matched repair · pending replay verification</em></div>
-          <div class="stage-caption" id="case-stage-caption"><b>Start with behavior sequence</b><span>Time-ordered video interactions are the evidence for need inference.</span></div>
+          <div class="stage-caption" id="case-stage-caption"><b>Memory context</b><span>Long-term profile, short-term behavior, and working context jointly support need inference.</span></div>
         </div>
         <div class="graph-controls">
           <button class="graph-reset" id="case-reset" type="button" disabled>Reset</button>
@@ -114,5 +115,5 @@
   </main>
   <footer>EvoRec · A Unified Self-Evolving Agentic Recommender<br><small>Kuaishou logo sourced from <a href="https://www.kuaishou.com/official/material-lib" target="_blank" rel="noreferrer">Kuaishou's official media library</a>.</small></footer><button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">↑</button>
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-resolution figure" hidden><button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image viewer">×</button><div class="lightbox-stage"><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></div></div>
-  <script src="assets/site.js?v=20261029-12"></script>
+  <script src="assets/site.js?v=20261029-13"></script>
 </body></html>
