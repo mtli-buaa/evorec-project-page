@@ -13,7 +13,7 @@ body{position:relative;overflow-x:hidden;background:linear-gradient(180deg,#f8fb
 .ambient{position:fixed;z-index:0;border-radius:50%;filter:blur(8px);pointer-events:none;opacity:.24;will-change:transform}
 .ambient-one{width:420px;height:420px;top:-190px;left:-160px;background:radial-gradient(circle,#90adff55 0,#90adff00 70%);animation:drift-one 16s ease-in-out infinite alternate}
 .ambient-two{width:520px;height:520px;top:240px;right:-260px;background:radial-gradient(circle,#71d6cb4d 0,#71d6cb00 70%);animation:drift-two 19s ease-in-out infinite alternate}
-.kuaishou-watermark{position:absolute;z-index:0;top:0;left:0;width:100%;height:560px;overflow:hidden;pointer-events:none}.kuaishou-watermark::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 420px 330px at calc(100% - 110px) 130px,#ff6b3d10 0,#ff8a5707 34%,#ff8a5702 62%,transparent 78%)}.kuaishou-watermark img{position:absolute;top:92px;right:max(28px,calc((100vw - 1240px)/2));left:auto;width:170px;height:auto;opacity:.085;filter:none;transform:none;image-rendering:auto}
+.kuaishou-watermark{position:absolute;z-index:0;top:0;left:0;width:100%;height:560px;overflow:hidden;pointer-events:none}.kuaishou-watermark::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 360px 300px at calc(100% - 80px) 130px,#ff6b3d10 0,#ff8a5707 34%,#ff8a5702 62%,transparent 78%)}.kuaishou-watermark img{position:absolute;top:92px;right:max(18px,calc((100vw - 1040px)/2 - 150px));left:auto;width:130px;height:auto;opacity:.085;filter:none;transform:none;image-rendering:auto}
 @keyframes drift-one{to{transform:translate(80px,90px) scale(1.14)}}
 @keyframes drift-two{to{transform:translate(-90px,140px) scale(.92)}}
 .hero{position:relative}
