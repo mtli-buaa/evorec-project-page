@@ -152,3 +152,8 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 .reasoning-canvas[data-stage="4"] .reasoning-lines path,
 .reasoning-canvas[data-stage="5"] .reasoning-lines path,
 .reasoning-canvas[data-stage="6"] .reasoning-lines path{opacity:0!important;animation:none!important}
+
+/* Page sequence: feature the interactive case study immediately after key metrics. */
+.page{display:flex;flex-direction:column}
+.hero{order:1}.hero-figure{order:2}.key-metrics{order:3}
+#case-study{order:4}#abstract{order:5}#method{order:6}#results{order:7}#analysis{order:8}#bibtex-section{order:9}
