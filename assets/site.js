@@ -82,6 +82,8 @@ const caseReset = document.querySelector('#case-reset');
 const caseStageCaption = document.querySelector('#case-stage-caption');
 const shortTermMemory = document.querySelector('#short-term-memory');
 const shortTermToggle = document.querySelector('#short-term-toggle');
+const longTermMemory = document.querySelector('#long-term-memory');
+const longTermToggle = document.querySelector('#long-term-toggle');
 const reasoningLines = reasoningCanvas.querySelector('.reasoning-lines');
 const inferenceHub = reasoningCanvas.querySelector('.inference-hub');
 const memoryInputs = [
@@ -112,6 +114,7 @@ if ('ResizeObserver' in window) {
   const connectorObserver = new ResizeObserver(() => requestAnimationFrame(updateMemoryConnectors));
   connectorObserver.observe(reasoningCanvas);
   connectorObserver.observe(shortTermMemory);
+  connectorObserver.observe(longTermMemory);
 }
 let caseStep = 0;
 let caseTransitioning = false;
@@ -132,13 +135,28 @@ const showCaseStep = (index) => {
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
   if (caseStep > 0) {
+    longTermMemory.classList.remove('is-open');
+    longTermToggle.setAttribute('aria-expanded', 'false');
     shortTermMemory.classList.remove('is-open');
     shortTermToggle.setAttribute('aria-expanded', 'false');
   }
 };
+longTermToggle.addEventListener('click', () => {
+  const open = longTermMemory.classList.toggle('is-open');
+  longTermToggle.setAttribute('aria-expanded', String(open));
+  if (open) {
+    shortTermMemory.classList.remove('is-open');
+    shortTermToggle.setAttribute('aria-expanded', 'false');
+  }
+  requestAnimationFrame(updateMemoryConnectors);
+});
 shortTermToggle.addEventListener('click', () => {
   const open = shortTermMemory.classList.toggle('is-open');
   shortTermToggle.setAttribute('aria-expanded', String(open));
+  if (open) {
+    longTermMemory.classList.remove('is-open');
+    longTermToggle.setAttribute('aria-expanded', 'false');
+  }
   requestAnimationFrame(updateMemoryConnectors);
 });
 const advanceCase = () => {
