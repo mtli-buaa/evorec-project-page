@@ -5,7 +5,7 @@
   <meta name="description" content="EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees">
   <title>EvoRec | Self-Evolving Agentic Recommendation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-5">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-6">
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
@@ -26,31 +26,6 @@
     <figure class="figure hero-figure"><a href="assets/overview-hires.png" target="_blank" rel="noreferrer" aria-label="Open Figure 1 at full resolution"><img src="assets/overview-hires.png" alt="Comparison of conventional cascaded recommendation and EvoRec"></a><figcaption><b>Recommendation should learn from outcomes.</b> EvoRec replaces a fixed cascade with an autonomous loop of need understanding, planning, execution, feedback, reflection, and repair.</figcaption></figure>
 
     <div class="key-metrics" aria-label="Key findings"><article><b>+15.7%</b><span>Hit@50</span></article><article><b>+4.6%</b><span>Revenue</span></article><article><b>+3.5%</b><span>CTCVR</span></article><article><b>+14.5%</b><span>High-intent revenue</span></article></div>
-
-    <section id="abstract"><h2>Abstract</h2><p>Conventional recommender systems follow cascaded retrieval, pre-ranking, and ranking pipelines with predefined models and offline-optimized configurations, limiting their ability to adapt to evolving user needs and observed outcomes. Recent agentic recommenders introduce reasoning and tool use but largely focus on isolated stages, lacking both end-to-end decision control and systematic reflection on recommendation failures.</p><p>We propose <b>EvoRec</b>, a unified agentic recommendation framework with dynamic reflection that integrates end-to-end autonomous recommendation with reflection-driven self-evolution. A Need Agent infers structured needs from user memory, a Planning Agent adaptively allocates retrieval budgets and selects tools and ranking-fusion weights, and an Acting Executor deterministically executes the plan. A Dynamic Reflection Tree then localizes failures, generates personalized repairs, verifies them through replay, and evolves reusable strategies without updating agent parameters. EvoRec improves Hit@50 by <b>15.7%</b> over the strongest baseline; a seven-day online A/B test increases advertising revenue by <b>4.6%</b> and CTCVR by <b>3.5%</b>.</p></section>
-
-    <section id="method"><h2>Method</h2><figure class="figure"><a href="assets/evorec-architecture.pdf" target="_blank" rel="noreferrer" aria-label="Open Figure 2 as the original vector PDF"><img src="assets/overview-v2.png" alt="Updated EvoRec architecture with autonomous recommendation and a Dynamic Reflection Tree"></a><figcaption><b>Figure 2.</b> EvoRec unifies autonomous recommendation and reflection-driven self-evolution. The upper path performs need inference, adaptive planning, and deterministic execution; the Dynamic Reflection Tree performs hierarchical error diagnosis, user-level repair, and system-level tree evolution.</figcaption></figure></section>
-
-    <section id="results">
-      <h2>Results</h2>
-      <figure class="figure"><a href="assets/main-table.png" target="_blank" rel="noreferrer" aria-label="Open Table 1 at full resolution"><img src="assets/main-table.png" alt="Performance comparison of recommendation methods"></a><figcaption><b>Table 1.</b> EvoRec achieves the best results across all accuracy metrics, improving Hit@10 by 19.0%, Hit@50 by 15.7%, and NDCG@10 by 17.5% over the strongest baseline.</figcaption></figure>
-      <h3 class="subheading">Online Evaluation</h3>
-      <div class="online-grid">
-        <figure class="figure"><a href="assets/online-ab-table.png" target="_blank" rel="noreferrer" aria-label="Open online A/B results at full resolution"><img src="assets/online-ab-table.png" alt="Online A/B results within the deployment scope"></a><figcaption><b>Table 6 · Seven-day online A/B test.</b> Revenue rises by 4.6% overall and 14.5% for high-intent users.</figcaption></figure>
-        <figure class="figure"><a href="assets/online-categories.png" target="_blank" rel="noreferrer" aria-label="Open category-level online results at full resolution"><img src="assets/online-categories.png" alt="Online CTCVR comparison across eight industry categories"></a><figcaption><b>Figure 4 · Category-level online results.</b> CTCVR improves across all eight anonymized industry categories.</figcaption></figure>
-      </div>
-    </section>
-
-    <section id="analysis">
-      <h2>Ablations &amp; Analysis</h2>
-      <div class="ablation-grid">
-        <figure class="figure"><a href="assets/ablation-agentic.png" target="_blank" rel="noreferrer" aria-label="Open agentic decision ablation at full resolution"><img src="assets/ablation-agentic.png" alt="Ablation comparing agentic decisions with static variants"></a><figcaption><b>Table 2 · Agentic vs. static decisions.</b> Removing adaptive decisions reduces Hit@50 by 3.1%–13.4%.</figcaption></figure>
-        <figure class="figure"><a href="assets/ablation-tools.png" target="_blank" rel="noreferrer" aria-label="Open retrieval-tool ablation at full resolution"><img src="assets/ablation-tools.png" alt="Retrieval-tool ablation results"></a><figcaption><b>Table 3 · Retrieval-tool collaboration.</b> All tools contribute, with Item-CF and User-CF providing the largest gains.</figcaption></figure>
-        <figure class="figure"><a href="assets/ablation-ranking.png" target="_blank" rel="noreferrer" aria-label="Open ranking fusion ablation at full resolution"><img src="assets/ablation-ranking.png" alt="Ablation of ranking-signal fusion strategies"></a><figcaption><b>Table 4 · Ranking-signal fusion.</b> Agentic per-user fusion raises Hit@50 from 23.28% to 23.90%.</figcaption></figure>
-        <figure class="figure"><a href="assets/ablation-reflection.png" target="_blank" rel="noreferrer" aria-label="Open Dynamic Reflection Tree ablation at full resolution"><img src="assets/ablation-reflection.png" alt="Ablation of Dynamic Reflection Tree components"></a><figcaption><b>Table 5 · Dynamic Reflection Tree.</b> Personalization, evolution, memory-error handling, and verification all contribute.</figcaption></figure>
-      </div>
-      <figure class="figure"><a href="assets/analysis-rounds.png" target="_blank" rel="noreferrer" aria-label="Open evolution-over-rounds analysis at full resolution"><img src="assets/analysis-rounds.png" alt="Relative Hit@50 gain over accumulation and evaluation rounds"></a><figcaption><b>Figure 5 · Evolution over rounds.</b> As verified reflective experience accumulates, EvoRec's relative Hit@50 gain grows to 2.9% by day D+4, while variants without tree evolution or ERROR-MEMORY plateau.</figcaption></figure>
-    </section>
 
     <section id="case-study">
       <h2>Case Study</h2>
@@ -97,6 +72,33 @@
       </div>
       <figure class="figure case-overview"><a href="assets/casestudy.pdf" target="_blank" rel="noreferrer" aria-label="Open the updated case-study schematic as the original vector PDF"><img src="assets/casestudy-hires.png" alt="Updated EvoRec case study from a missed need through hierarchical diagnosis to repair and replay"></a><figcaption><b>Paper schematic.</b> This full reflection round illustrates hierarchical ERROR-NEED diagnosis, personalized repair, and replay verification; the interactive episode above uses the supplied anonymized trace and ends at a matched repair pending replay.</figcaption></figure>
     </section>
+
+
+    <section id="abstract"><h2>Abstract</h2><p>Conventional recommender systems follow cascaded retrieval, pre-ranking, and ranking pipelines with predefined models and offline-optimized configurations, limiting their ability to adapt to evolving user needs and observed outcomes. Recent agentic recommenders introduce reasoning and tool use but largely focus on isolated stages, lacking both end-to-end decision control and systematic reflection on recommendation failures.</p><p>We propose <b>EvoRec</b>, a unified agentic recommendation framework with dynamic reflection that integrates end-to-end autonomous recommendation with reflection-driven self-evolution. A Need Agent infers structured needs from user memory, a Planning Agent adaptively allocates retrieval budgets and selects tools and ranking-fusion weights, and an Acting Executor deterministically executes the plan. A Dynamic Reflection Tree then localizes failures, generates personalized repairs, verifies them through replay, and evolves reusable strategies without updating agent parameters. EvoRec improves Hit@50 by <b>15.7%</b> over the strongest baseline; a seven-day online A/B test increases advertising revenue by <b>4.6%</b> and CTCVR by <b>3.5%</b>.</p></section>
+
+    <section id="method"><h2>Method</h2><figure class="figure"><a href="assets/evorec-architecture.pdf" target="_blank" rel="noreferrer" aria-label="Open Figure 2 as the original vector PDF"><img src="assets/overview-v2.png" alt="Updated EvoRec architecture with autonomous recommendation and a Dynamic Reflection Tree"></a><figcaption><b>Figure 2.</b> EvoRec unifies autonomous recommendation and reflection-driven self-evolution. The upper path performs need inference, adaptive planning, and deterministic execution; the Dynamic Reflection Tree performs hierarchical error diagnosis, user-level repair, and system-level tree evolution.</figcaption></figure></section>
+
+    <section id="results">
+      <h2>Results</h2>
+      <figure class="figure"><a href="assets/main-table.png" target="_blank" rel="noreferrer" aria-label="Open Table 1 at full resolution"><img src="assets/main-table.png" alt="Performance comparison of recommendation methods"></a><figcaption><b>Table 1.</b> EvoRec achieves the best results across all accuracy metrics, improving Hit@10 by 19.0%, Hit@50 by 15.7%, and NDCG@10 by 17.5% over the strongest baseline.</figcaption></figure>
+      <h3 class="subheading">Online Evaluation</h3>
+      <div class="online-grid">
+        <figure class="figure"><a href="assets/online-ab-table.png" target="_blank" rel="noreferrer" aria-label="Open online A/B results at full resolution"><img src="assets/online-ab-table.png" alt="Online A/B results within the deployment scope"></a><figcaption><b>Table 6 · Seven-day online A/B test.</b> Revenue rises by 4.6% overall and 14.5% for high-intent users.</figcaption></figure>
+        <figure class="figure"><a href="assets/online-categories.png" target="_blank" rel="noreferrer" aria-label="Open category-level online results at full resolution"><img src="assets/online-categories.png" alt="Online CTCVR comparison across eight industry categories"></a><figcaption><b>Figure 4 · Category-level online results.</b> CTCVR improves across all eight anonymized industry categories.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <h2>Ablations &amp; Analysis</h2>
+      <div class="ablation-grid">
+        <figure class="figure"><a href="assets/ablation-agentic.png" target="_blank" rel="noreferrer" aria-label="Open agentic decision ablation at full resolution"><img src="assets/ablation-agentic.png" alt="Ablation comparing agentic decisions with static variants"></a><figcaption><b>Table 2 · Agentic vs. static decisions.</b> Removing adaptive decisions reduces Hit@50 by 3.1%–13.4%.</figcaption></figure>
+        <figure class="figure"><a href="assets/ablation-tools.png" target="_blank" rel="noreferrer" aria-label="Open retrieval-tool ablation at full resolution"><img src="assets/ablation-tools.png" alt="Retrieval-tool ablation results"></a><figcaption><b>Table 3 · Retrieval-tool collaboration.</b> All tools contribute, with Item-CF and User-CF providing the largest gains.</figcaption></figure>
+        <figure class="figure"><a href="assets/ablation-ranking.png" target="_blank" rel="noreferrer" aria-label="Open ranking fusion ablation at full resolution"><img src="assets/ablation-ranking.png" alt="Ablation of ranking-signal fusion strategies"></a><figcaption><b>Table 4 · Ranking-signal fusion.</b> Agentic per-user fusion raises Hit@50 from 23.28% to 23.90%.</figcaption></figure>
+        <figure class="figure"><a href="assets/ablation-reflection.png" target="_blank" rel="noreferrer" aria-label="Open Dynamic Reflection Tree ablation at full resolution"><img src="assets/ablation-reflection.png" alt="Ablation of Dynamic Reflection Tree components"></a><figcaption><b>Table 5 · Dynamic Reflection Tree.</b> Personalization, evolution, memory-error handling, and verification all contribute.</figcaption></figure>
+      </div>
+      <figure class="figure"><a href="assets/analysis-rounds.png" target="_blank" rel="noreferrer" aria-label="Open evolution-over-rounds analysis at full resolution"><img src="assets/analysis-rounds.png" alt="Relative Hit@50 gain over accumulation and evaluation rounds"></a><figcaption><b>Figure 5 · Evolution over rounds.</b> As verified reflective experience accumulates, EvoRec's relative Hit@50 gain grows to 2.9% by day D+4, while variants without tree evolution or ERROR-MEMORY plateau.</figcaption></figure>
+    </section>
+
 
     <section id="bibtex-section"><h2>BibTeX</h2><div class="bibtex"><button id="copy" type="button">Copy</button><pre id="bibtex">@misc{li2027evorec,
   title     = {EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees},
