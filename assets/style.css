@@ -137,3 +137,11 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 .graph-action:disabled{border-color:#9fc9ae;background:#b9d8c3;color:#365d43;opacity:1;box-shadow:none}
 .graph-reset:disabled{border-color:#b8d5c2;background:#e7f1ea;color:#63816d;opacity:1;box-shadow:none}
 @media(max-width:760px){.graph-controls{gap:12px;padding:18px 14px}.graph-action,.graph-reset{min-height:50px;padding:12px 20px;font-size:15px}}
+
+/* Hero identity block: larger author and institution typography */
+.authors{font-size:21px;line-height:1.55;font-weight:600}
+.affiliation{margin-top:12px;gap:6px;line-height:1.4}
+.affiliation b{font-size:22px;font-weight:750;letter-spacing:-.01em}
+.affiliation small{max-width:900px;color:#596579;font-size:17px;font-weight:600;line-height:1.45;letter-spacing:0}
+.author-note{margin-top:8px;font-size:14px}
+@media(max-width:700px){.authors{font-size:18px;line-height:1.6}.affiliation{margin-top:14px;gap:7px}.affiliation b{font-size:20px}.affiliation small{max-width:94%;font-size:15px;line-height:1.5}.author-note{font-size:13px}}
