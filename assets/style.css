@@ -125,3 +125,15 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 /* User header clearance */
 .reasoning-canvas{height:900px}.user-node{left:28px;top:112px;width:305px}.user-node b{white-space:nowrap;line-height:1.25}.user-node small{display:block;white-space:nowrap;line-height:1.35}.reasoning-canvas .memory-node.m1{top:325px}.reasoning-canvas .memory-node.m2{top:425px}.reasoning-canvas .memory-node.m3{top:525px}.reasoning-canvas .memory-node.m4{top:625px}.reasoning-canvas .memory-node.m5{top:725px}.inference-hub{top:340px}.recall-routes{bottom:30px}.planner-node{top:358px}
 @media(max-width:760px){.reasoning-canvas{height:1460px}.user-node{left:14px;top:108px;width:calc(50% - 23px)}.user-node b{white-space:normal;font-size:14px}.user-node small{white-space:normal;font-size:10px}.reasoning-canvas .memory-node.m1{top:305px}.reasoning-canvas .memory-node.m2{top:425px}.reasoning-canvas .memory-node.m3{top:545px}.reasoning-canvas .memory-node.m4{top:665px}.reasoning-canvas .memory-node.m5{top:785px}.need-cluster{top:305px}.inference-hub{top:950px}.planner-node{top:1050px}}
+
+/* Case-study controls: explicit high-contrast colors outside the canvas scope */
+.graph-controls{padding:20px 22px;background:#f1f8f3;border-top:1px solid #cfe6d6}
+.graph-action,.graph-reset{min-height:48px;padding:11px 24px;font-size:15px;line-height:1;border-radius:14px;opacity:1}
+.graph-action{border:2px solid #237a43;background:#2f9755;color:#fff;box-shadow:0 7px 18px #287c4333}
+.graph-action:hover:not(:disabled){background:#247f47;transform:translateY(-1px)}
+.graph-reset{border:2px solid #4a9664;background:#fff;color:#246e40}
+.graph-reset:hover:not(:disabled){background:#e6f5eb}
+.graph-action:focus-visible,.graph-reset:focus-visible{outline:3px solid #ffb45a;outline-offset:3px}
+.graph-action:disabled{border-color:#9fc9ae;background:#b9d8c3;color:#365d43;opacity:1;box-shadow:none}
+.graph-reset:disabled{border-color:#b8d5c2;background:#e7f1ea;color:#63816d;opacity:1;box-shadow:none}
+@media(max-width:760px){.graph-controls{gap:12px;padding:18px 14px}.graph-action,.graph-reset{min-height:50px;padding:12px 20px;font-size:15px}}
