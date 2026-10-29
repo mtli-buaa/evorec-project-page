@@ -82,6 +82,37 @@ const caseReset = document.querySelector('#case-reset');
 const caseStageCaption = document.querySelector('#case-stage-caption');
 const shortTermMemory = document.querySelector('#short-term-memory');
 const shortTermToggle = document.querySelector('#short-term-toggle');
+const reasoningLines = reasoningCanvas.querySelector('.reasoning-lines');
+const inferenceHub = reasoningCanvas.querySelector('.inference-hub');
+const memoryInputs = [
+  [reasoningCanvas.querySelector('.lt-memory-v2'), reasoningLines.querySelector('.long-input')],
+  [reasoningCanvas.querySelector('.st-memory-v2'), reasoningLines.querySelector('.short-input')],
+  [reasoningCanvas.querySelector('.wm-memory-v2'), reasoningLines.querySelector('.working-input')]
+];
+
+const updateMemoryConnectors = () => {
+  const canvasRect = reasoningCanvas.getBoundingClientRect();
+  const hubRect = inferenceHub.getBoundingClientRect();
+  if (!canvasRect.width || !canvasRect.height) return;
+  const scaleX = 1000 / canvasRect.width;
+  const scaleY = 900 / canvasRect.height;
+  const targetX = (hubRect.left - canvasRect.left + 2) * scaleX;
+  const targetY = (hubRect.top - canvasRect.top + hubRect.height / 2) * scaleY;
+  memoryInputs.forEach(([card, path]) => {
+    const rect = card.getBoundingClientRect();
+    const startX = (rect.right - canvasRect.left - 2) * scaleX;
+    const startY = (rect.top - canvasRect.top + rect.height / 2) * scaleY;
+    const bend = Math.max(28, (targetX - startX) * 0.48);
+    path.setAttribute('d', `M${startX.toFixed(1)} ${startY.toFixed(1)} C${(startX + bend).toFixed(1)} ${startY.toFixed(1)} ${(targetX - bend).toFixed(1)} ${targetY.toFixed(1)} ${targetX.toFixed(1)} ${targetY.toFixed(1)}`);
+  });
+};
+
+addEventListener('resize', updateMemoryConnectors);
+if ('ResizeObserver' in window) {
+  const connectorObserver = new ResizeObserver(() => requestAnimationFrame(updateMemoryConnectors));
+  connectorObserver.observe(reasoningCanvas);
+  connectorObserver.observe(shortTermMemory);
+}
 let caseStep = 0;
 let caseTransitioning = false;
 const caseActions = [
@@ -108,6 +139,7 @@ const showCaseStep = (index) => {
 shortTermToggle.addEventListener('click', () => {
   const open = shortTermMemory.classList.toggle('is-open');
   shortTermToggle.setAttribute('aria-expanded', String(open));
+  requestAnimationFrame(updateMemoryConnectors);
 });
 const advanceCase = () => {
   if (caseTransitioning) return;
@@ -123,3 +155,4 @@ const advanceCase = () => {
 caseAction.addEventListener('click', advanceCase);
 caseReset.addEventListener('click', () => { caseTransitioning = false; caseAction.disabled = false; showCaseStep(0); });
 showCaseStep(0);
+requestAnimationFrame(updateMemoryConnectors);

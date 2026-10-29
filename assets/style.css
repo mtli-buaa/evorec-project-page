@@ -249,3 +249,9 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 .reasoning-canvas[data-stage="0"] .need-cluster,
 .reasoning-canvas[data-stage="0"] .inference-hub{opacity:0;visibility:hidden;pointer-events:none;transform:scale(.88)}
 
+/* Three exact memory inputs; geometry is calculated from the live cards in site.js. */
+.need-paths .memory-input{stroke-width:3.2}
+.need-paths .long-input{stroke:var(--paper-green)}
+.need-paths .short-input{stroke:var(--paper-blue)}
+.need-paths .working-input{stroke:var(--paper-orange)}
+
