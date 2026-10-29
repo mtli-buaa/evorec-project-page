@@ -1,0 +1,115 @@
+const copy = document.querySelector('#copy');
+copy.addEventListener('click', async () => {
+  await navigator.clipboard.writeText(document.querySelector('#bibtex').innerText);
+  const old = copy.textContent; copy.textContent = 'Copied!';
+  setTimeout(() => copy.textContent = old, 1400);
+});
+
+const progressBar = document.querySelector('#scroll-progress-bar');
+const backToTop = document.querySelector('#back-to-top');
+const updateScrollUI = () => {
+  const scrollable = document.documentElement.scrollHeight - innerHeight;
+  const ratio = scrollable > 0 ? scrollY / scrollable : 0;
+  progressBar.style.transform = `scaleX(${ratio})`;
+  backToTop.classList.toggle('visible', scrollY > 640);
+};
+addEventListener('scroll', updateScrollUI, { passive: true });
+addEventListener('resize', updateScrollUI);
+updateScrollUI();
+backToTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+const revealTargets = document.querySelectorAll('section, .hero-figure');
+revealTargets.forEach((node) => node.classList.add('reveal'));
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px' });
+  revealTargets.forEach((node) => observer.observe(node));
+} else {
+  revealTargets.forEach((node) => node.classList.add('revealed'));
+}
+
+const sectionLinks = [...document.querySelectorAll('.section-nav a')];
+const linkedSections = sectionLinks.map((link) => document.querySelector(link.hash)).filter(Boolean);
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    sectionLinks.forEach((link) => link.classList.toggle('active', link.hash === `#${visible.target.id}`));
+  }, { rootMargin: '-18% 0px -65%', threshold: [0, 0.2, 0.5] });
+  linkedSections.forEach((section) => navObserver.observe(section));
+}
+
+const lightbox = document.querySelector('#lightbox');
+const lightboxImage = document.querySelector('#lightbox-image');
+const lightboxCaption = document.querySelector('#lightbox-caption');
+const lightboxClose = document.querySelector('#lightbox-close');
+let previousFocus = null;
+const closeLightbox = () => {
+  lightbox.classList.remove('open');
+  document.body.classList.remove('lightbox-open');
+  setTimeout(() => { lightbox.hidden = true; lightboxImage.src = ''; }, 180);
+  previousFocus?.focus();
+};
+document.querySelectorAll('.figure > a').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    previousFocus = link;
+    const image = link.querySelector('img');
+    const caption = link.closest('.figure')?.querySelector('figcaption');
+    lightboxImage.src = link.getAttribute('href');
+    lightboxImage.alt = image?.alt || 'Full-resolution figure';
+    lightboxCaption.textContent = caption?.textContent || '';
+    lightbox.hidden = false;
+    document.body.classList.add('lightbox-open');
+    requestAnimationFrame(() => lightbox.classList.add('open'));
+    lightboxClose.focus();
+  });
+});
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+addEventListener('keydown', (event) => { if (event.key === 'Escape' && !lightbox.hidden) closeLightbox(); });
+
+const caseFlow = document.querySelector('#case-flow');
+const reasoningCanvas = document.querySelector('#reasoning-canvas');
+const caseAction = document.querySelector('#case-action');
+const caseReset = document.querySelector('#case-reset');
+const caseStageCaption = document.querySelector('#case-stage-caption');
+let caseStep = 0;
+let caseTransitioning = false;
+const caseActions = [
+  { button: 'Infer Needs', title: 'Start with memory', detail: 'The agent has not inferred needs yet.' },
+  { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent produces its initial structured needs.' },
+  { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
+  { button: 'Run Retrieval', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, split equally across six needs.' },
+  { button: 'Diagnose Miss', title: '2,997 candidates returned', detail: 'Both routes succeed, but neither recalls the converted phone-rental item.' },
+  { button: 'Generate Repair', title: 'Reflection matches ERROR-NEED-001', detail: 'Supporting evidence entered the Need Agent, but the phone-acquisition need was omitted.' },
+  { button: 'Restart', title: 'Personalized repair generated', detail: 'Cross-check cash-flow pressure, price sensitivity, and durable-goods acquisition; replay remains pending.' }
+];
+
+const showCaseStep = (index) => {
+  caseStep = Math.max(0, Math.min(index, caseActions.length - 1));
+  reasoningCanvas.dataset.stage = caseStep;
+  caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
+  caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
+  caseReset.disabled = caseStep === 0;
+};
+const advanceCase = () => {
+  if (caseTransitioning) return;
+  if (caseStep === caseActions.length - 1) {
+    showCaseStep(0);
+    return;
+  }
+  caseTransitioning = true;
+  caseAction.disabled = true;
+  showCaseStep(caseStep + 1);
+  setTimeout(() => { caseAction.disabled = false; caseTransitioning = false; }, 900);
+};
+caseAction.addEventListener('click', advanceCase);
+caseReset.addEventListener('click', () => { caseTransitioning = false; caseAction.disabled = false; showCaseStep(0); });
+showCaseStep(0);
