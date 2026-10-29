@@ -94,8 +94,8 @@ const behaviorDetailFields = {
 let caseStep = 0;
 let caseTransitioning = false;
 const caseActions = [
-  { button: 'Infer Needs', title: 'Start with behavior sequence', detail: 'Time-ordered video interactions are the evidence for need inference.' },
-  { button: 'Open Recall Routes', title: 'Needs inferred from behavior', detail: 'The Need Agent maps timestamped P3S interactions to structured needs.' },
+  { button: 'Infer Needs', title: 'Memory context', detail: 'Long-term profile, short-term behavior, and working context jointly support need inference.' },
+  { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent combines stable traits with recent timestamped P3S interactions.' },
   { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
   { button: 'Run Retrieval', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, split equally across six needs.' },
   { button: 'Diagnose Miss', title: '3,000 candidates returned', detail: 'Both routes fully use their budgets, but neither recalls the converted phone-rental item.' },
