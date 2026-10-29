@@ -155,3 +155,15 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 .reasoning-canvas[data-stage="5"] .reasoning-lines path,
 .reasoning-canvas[data-stage="6"] .reasoning-lines path{opacity:0!important;animation:none!important}
 
+/* Reflection stages: reserve separate columns/rows for recall, results and diagnosis. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="5"] .recall-routes,
+  .reasoning-canvas[data-stage="6"] .recall-routes{left:28px;right:auto;top:135px;bottom:auto;width:300px;grid-template-columns:1fr}
+  .reasoning-canvas[data-stage="5"] .reflection-cluster,
+  .reasoning-canvas[data-stage="6"] .reflection-cluster{left:345px;bottom:32px;width:350px}
+  .reasoning-canvas[data-stage="5"] .result-list,
+  .reasoning-canvas[data-stage="6"] .result-list{right:28px;top:135px;width:300px}
+  .reasoning-canvas[data-stage="5"] .planner-node,
+  .reasoning-canvas[data-stage="6"] .planner-node{opacity:0;pointer-events:none}
+}
+
