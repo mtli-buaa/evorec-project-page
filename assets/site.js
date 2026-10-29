@@ -80,14 +80,25 @@ const reasoningCanvas = document.querySelector('#reasoning-canvas');
 const caseAction = document.querySelector('#case-action');
 const caseReset = document.querySelector('#case-reset');
 const caseStageCaption = document.querySelector('#case-stage-caption');
+const behaviorNodes = [...document.querySelectorAll('.memory-node')];
+const behaviorDetail = document.querySelector('#behavior-detail');
+const behaviorDetailClose = document.querySelector('#behavior-detail-close');
+const behaviorDetailFields = {
+  title: document.querySelector('#behavior-detail-title'),
+  time: document.querySelector('#behavior-detail-time'),
+  action: document.querySelector('#behavior-detail-action'),
+  sid: document.querySelector('#behavior-detail-sid'),
+  conversion: document.querySelector('#behavior-detail-conversion'),
+  copy: document.querySelector('#behavior-detail-copy')
+};
 let caseStep = 0;
 let caseTransitioning = false;
 const caseActions = [
-  { button: 'Infer Needs', title: 'Start with memory', detail: 'The agent has not inferred needs yet.' },
-  { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent produces its initial structured needs.' },
+  { button: 'Infer Needs', title: 'Start with behavior sequence', detail: 'Time-ordered video interactions are the evidence for need inference.' },
+  { button: 'Open Recall Routes', title: 'Needs inferred from behavior', detail: 'The Need Agent maps timestamped P3S interactions to structured needs.' },
   { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
   { button: 'Run Retrieval', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, split equally across six needs.' },
-  { button: 'Diagnose Miss', title: '2,997 candidates returned', detail: 'Both routes succeed, but neither recalls the converted phone-rental item.' },
+  { button: 'Diagnose Miss', title: '3,000 candidates returned', detail: 'Both routes fully use their budgets, but neither recalls the converted phone-rental item.' },
   { button: 'Generate Repair', title: 'Reflection matches ERROR-NEED-001', detail: 'Supporting evidence entered the Need Agent, but the phone-acquisition need was omitted.' },
   { button: 'Restart', title: 'Personalized repair generated', detail: 'Cross-check cash-flow pressure, price sensitivity, and durable-goods acquisition; replay remains pending.' }
 ];
@@ -98,7 +109,20 @@ const showCaseStep = (index) => {
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
+  if (caseStep > 0) behaviorDetail.classList.add('is-hidden');
 };
+const showBehaviorDetail = (node) => {
+  behaviorNodes.forEach((item) => item.classList.toggle('is-selected', item === node));
+  behaviorDetailFields.title.textContent = node.dataset.title;
+  behaviorDetailFields.time.textContent = node.dataset.time;
+  behaviorDetailFields.action.textContent = node.dataset.action;
+  behaviorDetailFields.sid.textContent = node.dataset.sid;
+  behaviorDetailFields.conversion.textContent = node.dataset.conversion;
+  behaviorDetailFields.copy.textContent = node.dataset.detail;
+  behaviorDetail.classList.remove('is-hidden');
+};
+behaviorNodes.forEach((node) => node.addEventListener('click', () => showBehaviorDetail(node)));
+behaviorDetailClose.addEventListener('click', () => behaviorDetail.classList.add('is-hidden'));
 const advanceCase = () => {
   if (caseTransitioning) return;
   if (caseStep === caseActions.length - 1) {
