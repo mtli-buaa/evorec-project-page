@@ -80,17 +80,8 @@ const reasoningCanvas = document.querySelector('#reasoning-canvas');
 const caseAction = document.querySelector('#case-action');
 const caseReset = document.querySelector('#case-reset');
 const caseStageCaption = document.querySelector('#case-stage-caption');
-const behaviorNodes = [...document.querySelectorAll('.memory-node')];
-const behaviorDetail = document.querySelector('#behavior-detail');
-const behaviorDetailClose = document.querySelector('#behavior-detail-close');
-const behaviorDetailFields = {
-  title: document.querySelector('#behavior-detail-title'),
-  time: document.querySelector('#behavior-detail-time'),
-  action: document.querySelector('#behavior-detail-action'),
-  sid: document.querySelector('#behavior-detail-sid'),
-  conversion: document.querySelector('#behavior-detail-conversion'),
-  copy: document.querySelector('#behavior-detail-copy')
-};
+const shortTermMemory = document.querySelector('#short-term-memory');
+const shortTermToggle = document.querySelector('#short-term-toggle');
 let caseStep = 0;
 let caseTransitioning = false;
 const caseActions = [
@@ -109,20 +100,15 @@ const showCaseStep = (index) => {
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
-  if (caseStep > 0) behaviorDetail.classList.add('is-hidden');
+  if (caseStep > 0) {
+    shortTermMemory.classList.remove('is-open');
+    shortTermToggle.setAttribute('aria-expanded', 'false');
+  }
 };
-const showBehaviorDetail = (node) => {
-  behaviorNodes.forEach((item) => item.classList.toggle('is-selected', item === node));
-  behaviorDetailFields.title.textContent = node.dataset.title;
-  behaviorDetailFields.time.textContent = node.dataset.time;
-  behaviorDetailFields.action.textContent = node.dataset.action;
-  behaviorDetailFields.sid.textContent = node.dataset.sid;
-  behaviorDetailFields.conversion.textContent = node.dataset.conversion;
-  behaviorDetailFields.copy.textContent = node.dataset.detail;
-  behaviorDetail.classList.remove('is-hidden');
-};
-behaviorNodes.forEach((node) => node.addEventListener('click', () => showBehaviorDetail(node)));
-behaviorDetailClose.addEventListener('click', () => behaviorDetail.classList.add('is-hidden'));
+shortTermToggle.addEventListener('click', () => {
+  const open = shortTermMemory.classList.toggle('is-open');
+  shortTermToggle.setAttribute('aria-expanded', String(open));
+});
 const advanceCase = () => {
   if (caseTransitioning) return;
   if (caseStep === caseActions.length - 1) {
