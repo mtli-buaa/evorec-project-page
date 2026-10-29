@@ -83,9 +83,11 @@ const caseStageCaption = document.querySelector('#case-stage-caption');
 const shortTermMemory = document.querySelector('#short-term-memory');
 const shortTermToggle = document.querySelector('#short-term-toggle');
 const longTermMemory = document.querySelector('#long-term-memory');
-const longTermToggle = document.querySelector('#long-term-toggle');
 const reasoningLines = reasoningCanvas.querySelector('.reasoning-lines');
 const inferenceHub = reasoningCanvas.querySelector('.inference-hub');
+const needNodes = [...reasoningCanvas.querySelectorAll('.need-node')];
+const needBudgetPaths = [...reasoningLines.querySelectorAll('.need-budget-paths path')];
+const needSatisfactionRoute = reasoningCanvas.querySelector('.ns-route');
 const memoryInputs = [
   [reasoningCanvas.querySelector('.lt-memory-v2'), reasoningLines.querySelector('.long-input')],
   [reasoningCanvas.querySelector('.st-memory-v2'), reasoningLines.querySelector('.short-input')],
@@ -107,6 +109,17 @@ const updateMemoryConnectors = () => {
     const bend = Math.max(28, (targetX - startX) * 0.48);
     path.setAttribute('d', `M${startX.toFixed(1)} ${startY.toFixed(1)} C${(startX + bend).toFixed(1)} ${startY.toFixed(1)} ${(targetX - bend).toFixed(1)} ${targetY.toFixed(1)} ${targetX.toFixed(1)} ${targetY.toFixed(1)}`);
   });
+  const routeRect = needSatisfactionRoute.getBoundingClientRect();
+  const routeX = (routeRect.left - canvasRect.left + routeRect.width * .72) * scaleX;
+  const routeY = (routeRect.top - canvasRect.top + 2) * scaleY;
+  needNodes.forEach((node, index) => {
+    const rect = node.getBoundingClientRect();
+    const startX = (rect.right - canvasRect.left - 3) * scaleX;
+    const startY = (rect.top - canvasRect.top + rect.height / 2) * scaleY;
+    const spreadX = routeX + (index - 2.5) * 5;
+    const controlY = startY + Math.max(35, (routeY - startY) * .48);
+    needBudgetPaths[index].setAttribute('d', `M${startX.toFixed(1)} ${startY.toFixed(1)} C${(startX + 38).toFixed(1)} ${startY.toFixed(1)} ${spreadX.toFixed(1)} ${controlY.toFixed(1)} ${spreadX.toFixed(1)} ${routeY.toFixed(1)}`);
+  });
 };
 
 addEventListener('resize', updateMemoryConnectors);
@@ -122,7 +135,9 @@ const caseActions = [
   { button: 'Infer Needs', title: 'Memory context', detail: 'Long-term profile, short-term behavior, and working context jointly support need inference.' },
   { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent combines stable traits with recent timestamped P3S interactions.' },
   { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
-  { button: 'Run Retrieval', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, split equally across six needs.' },
+  { button: 'Call Tools', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, distributed by need priority (high / medium / low = 3 / 2 / 1).' },
+  { button: 'Merge & Rank', title: 'Retrieval tools execute the plan', detail: 'BC and NS invoke complementary CF, semantic, lexical, and reasoning tools.' },
+  { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication precede weighted RRF over Base, SASRec, and Two-Tower rankings.' },
   { button: 'Diagnose Miss', title: '3,000 candidates returned', detail: 'Both routes fully use their budgets, but neither recalls the converted phone-rental item.' },
   { button: 'Generate Repair', title: 'Reflection matches ERROR-NEED-001', detail: 'Supporting evidence entered the Need Agent, but the phone-acquisition need was omitted.' },
   { button: 'Restart', title: 'Personalized repair generated', detail: 'Cross-check cash-flow pressure, price sensitivity, and durable-goods acquisition; replay remains pending.' }
@@ -135,16 +150,13 @@ const showCaseStep = (index) => {
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
   if (caseStep > 0) {
-    longTermMemory.classList.remove('is-open');
-    longTermToggle.setAttribute('aria-expanded', 'false');
+    longTermMemory.removeAttribute('open');
     shortTermMemory.classList.remove('is-open');
     shortTermToggle.setAttribute('aria-expanded', 'false');
   }
 };
-longTermToggle.addEventListener('click', () => {
-  const open = longTermMemory.classList.toggle('is-open');
-  longTermToggle.setAttribute('aria-expanded', String(open));
-  if (open) {
+longTermMemory.addEventListener('toggle', () => {
+  if (longTermMemory.open) {
     shortTermMemory.classList.remove('is-open');
     shortTermToggle.setAttribute('aria-expanded', 'false');
   }
@@ -154,8 +166,7 @@ shortTermToggle.addEventListener('click', () => {
   const open = shortTermMemory.classList.toggle('is-open');
   shortTermToggle.setAttribute('aria-expanded', String(open));
   if (open) {
-    longTermMemory.classList.remove('is-open');
-    longTermToggle.setAttribute('aria-expanded', 'false');
+    longTermMemory.removeAttribute('open');
   }
   requestAnimationFrame(updateMemoryConnectors);
 });
