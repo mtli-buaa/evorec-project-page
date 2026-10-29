@@ -271,7 +271,7 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 
 /* Larger route cards: give the two retrieval branches room to breathe. */
 @media(min-width:761px){
-  .recall-routes{left:300px;right:250px;gap:20px}
+  .recall-routes{left:calc(50% - 270px);right:auto;width:540px;gap:20px}
   .route-card{min-height:180px;padding:22px 20px}
   .route-card>span{font-size:12px}
   .route-card>b{max-width:72%;margin:10px 0 8px;font-size:20px;line-height:1.22}
@@ -281,6 +281,6 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .route-tools i{flex:1;display:grid;min-height:52px;place-items:center;padding:8px 10px;font-size:13px;line-height:1.25;text-align:center}
   .reasoning-canvas[data-stage="6"] .recall-routes,
   .reasoning-canvas[data-stage="7"] .recall-routes,
-  .reasoning-canvas[data-stage="8"] .recall-routes{left:205px;right:455px}
+  .reasoning-canvas[data-stage="8"] .recall-routes{left:205px;right:auto;width:330px}
 }
 
