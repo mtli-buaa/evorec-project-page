@@ -5,7 +5,7 @@
   <meta name="description" content="EvoRec: A Unified Self-Evolving Agentic Recommender with Dynamic Reflection Trees">
   <title>EvoRec | Self-Evolving Agentic Recommendation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-21">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css?v=20261029-22">
   <style>.reasoning-canvas[data-stage="0"] .need-cluster,.reasoning-canvas[data-stage="0"] .inference-hub{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:scale(.88)!important}.kuaishou-watermark img{opacity:.18!important;filter:saturate(1.12) contrast(1.04)!important}@media(max-width:1180px){.kuaishou-watermark img{opacity:.15!important}}.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}.contact-card{padding:22px 24px;border:1px solid #dfe5ef;border-radius:18px;background:linear-gradient(145deg,#fff,#f7f9fd);box-shadow:0 10px 28px #23395d10}.contact-card small{display:block;margin-bottom:5px;color:#315fd5;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.contact-card b{display:block;color:#263247;font-size:19px}.contact-card span{display:block;margin-top:5px;color:#657084;font-size:15px;font-weight:600}@media(max-width:700px){.contact-cards{grid-template-columns:1fr}.contact-card{padding:18px}.contact-card b{font-size:17px}.contact-card span{font-size:13px}}</style>
 </head>
 <body>
@@ -35,7 +35,7 @@
         <div class="reasoning-canvas" id="reasoning-canvas" data-stage="0" aria-live="polite">
           <svg class="reasoning-lines" viewBox="0 0 1000 900" preserveAspectRatio="none" aria-hidden="true">
             <defs><marker id="case-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker></defs>
-            <g class="need-paths"><path d="M333 369 C390 369 420 395 430 410"/><path d="M333 469 C390 469 420 430 430 410"/><path d="M333 569 C390 569 415 455 430 410"/><path d="M333 669 C385 669 410 480 430 410"/><path d="M333 769 C380 769 405 505 430 410"/><path class="agent-output" d="M570 410 C620 410 640 166 672 166"/><path class="agent-output" d="M570 410 C625 410 645 226 672 226"/><path class="agent-output" d="M570 410 C630 410 650 286 672 286"/><path class="agent-output" d="M570 410 C635 410 655 346 672 346"/><path class="agent-output" d="M570 410 C635 410 655 406 672 406"/><path class="agent-output" d="M570 410 C630 410 650 466 672 466"/></g>
+            <g class="need-paths"><path class="memory-input long-input"/><path class="memory-input short-input"/><path class="memory-input working-input"/><path class="agent-output" d="M570 410 C620 410 640 166 672 166"/><path class="agent-output" d="M570 410 C625 410 645 226 672 226"/><path class="agent-output" d="M570 410 C630 410 650 286 672 286"/><path class="agent-output" d="M570 410 C635 410 655 346 672 346"/><path class="agent-output" d="M570 410 C635 410 655 406 672 406"/><path class="agent-output" d="M570 410 C630 410 650 466 672 466"/></g>
             <g class="route-paths"><path class="behavior-route" d="M195 410 C315 450 400 420 490 390"/><path class="need-route" d="M760 280 C680 300 610 330 540 390"/></g>
             <g class="result-paths"><path d="M620 375 C710 360 730 300 795 285"/><path d="M620 445 C710 440 730 390 795 365"/></g>
             <g class="reflect-paths"><path d="M850 400 C770 515 590 520 505 470"/></g>
@@ -108,5 +108,5 @@
   </main>
   <footer>EvoRec · A Unified Self-Evolving Agentic Recommender<br><small>Kuaishou logo sourced from <a href="https://www.kuaishou.com/official/material-lib" target="_blank" rel="noreferrer">Kuaishou's official media library</a>.</small></footer><button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">↑</button>
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-resolution figure" hidden><button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close image viewer">×</button><div class="lightbox-stage"><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></div></div>
-  <script src="assets/site.js?v=20261029-15"></script>
+  <script src="assets/site.js?v=20261029-22"></script>
 </body></html>
