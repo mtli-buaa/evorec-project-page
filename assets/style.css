@@ -191,6 +191,23 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
 .reasoning-canvas[data-stage="2"] .reflection-cluster,
 .reasoning-canvas[data-stage="2"] .repair-loop{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 
+/* Stage 2: compact planning node between needs and the two recall routes. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="2"] .planner-node{
+    left:calc(50% - 95px)!important;right:auto!important;top:500px!important;
+    width:190px!important;padding:15px 17px!important;border-width:2px!important;
+    border-radius:16px!important;opacity:1!important;visibility:visible!important;
+    transform:none!important;box-shadow:0 8px 20px #8d3e6218!important
+  }
+  .reasoning-canvas[data-stage="2"] .planner-node::before{
+    content:"↓"!important;position:absolute!important;left:50%!important;top:-45px!important;
+    transform:translateX(-50%)!important;color:#329b5b!important;font:900 31px/1 Inter,Arial,sans-serif!important
+  }
+  .reasoning-canvas[data-stage="2"] .planner-node span{font-size:9px!important}
+  .reasoning-canvas[data-stage="2"] .planner-node b{margin:5px 0!important;font-size:15px!important;line-height:1.15!important}
+  .reasoning-canvas[data-stage="2"] .planner-node small{font-size:10px!important}
+}
+
 /* Replay closes the repair loop: reinsert the repaired need, rerun, then verify success. */
 .reflection-cluster .repair-verified{display:none}
 .reasoning-canvas[data-stage="12"] .reflection-cluster .repair-pending{display:none}
