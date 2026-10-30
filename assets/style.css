@@ -167,6 +167,30 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="6"] .planner-node{opacity:0;pointer-events:none}
 }
 
+/* Early-scene isolation guard — keep physically last. */
+.reasoning-canvas[data-stage="0"] .recall-routes,
+.reasoning-canvas[data-stage="0"] .planner-node,
+.reasoning-canvas[data-stage="0"] .acting-execution,
+.reasoning-canvas[data-stage="0"] .execution-flow,
+.reasoning-canvas[data-stage="0"] .result-list,
+.reasoning-canvas[data-stage="0"] .reflection-tree,
+.reasoning-canvas[data-stage="0"] .reflection-cluster,
+.reasoning-canvas[data-stage="0"] .repair-loop,
+.reasoning-canvas[data-stage="1"] .recall-routes,
+.reasoning-canvas[data-stage="1"] .planner-node,
+.reasoning-canvas[data-stage="1"] .acting-execution,
+.reasoning-canvas[data-stage="1"] .execution-flow,
+.reasoning-canvas[data-stage="1"] .result-list,
+.reasoning-canvas[data-stage="1"] .reflection-tree,
+.reasoning-canvas[data-stage="1"] .reflection-cluster,
+.reasoning-canvas[data-stage="1"] .repair-loop,
+.reasoning-canvas[data-stage="2"] .acting-execution,
+.reasoning-canvas[data-stage="2"] .execution-flow,
+.reasoning-canvas[data-stage="2"] .result-list,
+.reasoning-canvas[data-stage="2"] .reflection-tree,
+.reasoning-canvas[data-stage="2"] .reflection-cluster,
+.reasoning-canvas[data-stage="2"] .repair-loop{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+
 /* Replay closes the repair loop: reinsert the repaired need, rerun, then verify success. */
 .reflection-cluster .repair-verified{display:none}
 .reasoning-canvas[data-stage="12"] .reflection-cluster .repair-pending{display:none}
