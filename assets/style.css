@@ -223,6 +223,38 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 
+/* Final tool choreography: begin visibly in the bottom pool, then move upward. */
+@media(min-width:761px){
+  html body .reasoning-canvas[data-stage="4"]{height:980px!important}
+  html body .reasoning-canvas[data-stage="4"] .recall-routes{left:32px!important;top:185px!important;width:36%!important;gap:24px!important}
+  html body .reasoning-canvas[data-stage="4"] .route-card{min-height:230px!important}
+  html body .reasoning-canvas[data-stage="4"] .execution-flow{display:block!important;inset:0!important;width:100%!important;height:900px!important;min-height:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;pointer-events:none!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-step{position:absolute!important;inset:0!important;width:100%!important;height:900px!important;padding:0!important;border:0!important;background:transparent!important;overflow:visible!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-step>span{position:absolute!important;left:4%!important;right:4%!important;top:auto!important;bottom:24px!important;height:142px!important;box-sizing:border-box!important;margin:0!important;padding:22px!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;border:3px dashed #8e9dab!important;border-radius:22px!important;background:#f7f9fbe8!important;color:#536577!important;font-size:19px!important;font-weight:900!important;text-align:center!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-step>span::after{content:"Tools start here, then move to their routes";position:absolute;left:0;right:0;bottom:18px;color:#8491a0;font-size:12px;font-weight:700;text-transform:none}
+  html body .reasoning-canvas[data-stage="4"] .pool-slots{position:absolute;z-index:1;left:7%;right:7%;bottom:76px;display:grid!important;grid-template-columns:repeat(5,1fr)!important;gap:18px!important;height:68px!important}
+  html body .reasoning-canvas[data-stage="4"] .pool-slots i{display:block!important;border:2px dashed #b2bdc8!important;border-radius:13px!important;background:#fff8!important}
+  html body .reasoning-canvas[data-stage="4"] .assignment-paths{display:block!important}
+  html body .reasoning-canvas[data-stage="4"] .assignment-paths i{position:absolute;z-index:1;display:block!important;border-left:3px dashed #91a4b7!important;border-top:3px dashed #91a4b7!important;border-radius:18px 0 0 0;opacity:.65}
+  html body .reasoning-canvas[data-stage="4"] .assignment-paths i:nth-child(1){left:41%;bottom:170px;width:13%;height:430px}
+  html body .reasoning-canvas[data-stage="4"] .assignment-paths i:nth-child(2){left:57%;bottom:170px;width:10%;height:285px;border-color:#7faa91!important}
+  html body .reasoning-canvas[data-stage="4"] .assignment-paths i:nth-child(3){left:70%;bottom:170px;width:9%;height:430px}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool{position:absolute!important;z-index:3;inset:0!important;display:block!important;width:100%!important;height:900px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool::before,html body .reasoning-canvas[data-stage="4"] .tool-pool::after{display:none!important;content:none!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i{position:absolute!important;width:14%!important;min-height:82px!important;margin:0!important;box-sizing:border-box!important;border-radius:16px!important;font-size:15px!important;animation-duration:1.55s!important;animation-delay:.8s!important;animation-timing-function:cubic-bezier(.2,.75,.2,1)!important;animation-fill-mode:both!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-item-cf{left:43%!important;top:235px!important;animation-name:pool-to-item!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-user-cf{left:59%!important;top:235px!important;animation-name:pool-to-user!important;animation-delay:1s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-embedding{left:75%!important;top:405px!important;animation-name:pool-to-embedding!important;animation-delay:1.2s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-bm25{left:43%!important;top:575px!important;animation-name:pool-to-bm25!important;animation-delay:1.4s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-one-reason{left:59%!important;top:575px!important;animation-name:pool-to-one!important;animation-delay:1.6s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-item-cf::before,html body .reasoning-canvas[data-stage="4"] .tool-bm25::before{content:"←"!important;left:-48px!important}
+}
+@keyframes pool-to-item{from{transform:translate(-254%,555px) scale(.88)}to{transform:none}}
+@keyframes pool-to-user{from{transform:translate(-215%,555px) scale(.88)}to{transform:none}}
+@keyframes pool-to-embedding{from{transform:translate(-176%,385px) scale(.88)}to{transform:none}}
+@keyframes pool-to-bm25{from{transform:translate(92%,215px) scale(.88)}to{transform:none}}
+@keyframes pool-to-one{from{transform:translate(131%,215px) scale(.88)}to{transform:none}}
+
 /* Five-tool allocation scene: one shared pool disperses to the two routes. */
 @media(min-width:761px){
   html body .reasoning-canvas[data-stage="4"] .tool-step,
