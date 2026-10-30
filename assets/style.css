@@ -167,6 +167,62 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="6"] .planner-node{opacity:0;pointer-events:none}
 }
 
+/* Stage 4: tools start in a bottom pool and travel to their assigned route. */
+@media(min-width:761px){
+  html body .reasoning-canvas[data-stage="4"] .recall-routes{
+    left:32px!important;top:190px!important;width:38%!important;gap:22px!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .route-card{
+    min-height:220px!important;padding:25px 27px!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .execution-flow{
+    display:block!important;left:42%!important;right:32px!important;top:170px!important;
+    min-height:570px!important;padding:0!important;border:0!important;background:transparent!important;
+    box-shadow:none!important;overflow:visible!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .tool-step{
+    position:relative!important;display:block!important;width:100%!important;height:570px!important;
+    padding:0!important;border:0!important;background:transparent!important;overflow:visible!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .tool-step>span{
+    position:absolute;left:12%;right:12%;bottom:0;margin:0!important;padding:20px 18px!important;
+    border:2px dashed #8e9dab!important;border-radius:17px!important;background:#f7f9fb!important;
+    color:#536577!important;font-size:16px!important;text-align:center!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .tool-step>span::after{
+    content:"5 tools · dynamically assigned";display:block;margin-top:5px;color:#8491a0;
+    font-size:11px;font-weight:700;letter-spacing:.02em;text-transform:none
+  }
+  html body .reasoning-canvas[data-stage="4"] .tool-pool{
+    position:absolute!important;inset:0 0 92px!important;display:block!important;width:auto!important;
+    height:auto!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .tool-pool::before,
+  html body .reasoning-canvas[data-stage="4"] .tool-pool::after{display:none!important;content:none!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i{
+    position:absolute!important;width:29%!important;min-height:92px!important;margin:0!important;
+    animation:tool-from-bottom .85s cubic-bezier(.18,.82,.22,1) both!important
+  }
+  html body .reasoning-canvas[data-stage="4"] .tool-item-cf{left:3%!important;top:38px!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-user-cf{left:35.5%!important;top:38px!important;animation-delay:.12s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-embedding{left:68%!important;top:192px!important;animation-delay:.24s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-bm25{left:3%!important;top:346px!important;animation-delay:.36s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-one-reason{left:35.5%!important;top:346px!important;animation-delay:.48s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-item-cf,
+  html body .reasoning-canvas[data-stage="4"] .tool-user-cf{border-color:#3984bb!important;color:#315f86!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-bm25,
+  html body .reasoning-canvas[data-stage="4"] .tool-one-reason{border-color:#36a15e!important;color:#28764b!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-item-cf::before,
+  html body .reasoning-canvas[data-stage="4"] .tool-bm25::before{
+    content:"←";position:absolute;left:-54px;top:50%;transform:translateY(-50%);
+    color:inherit;font:900 30px/1 Inter,Arial,sans-serif
+  }
+}
+@keyframes tool-from-bottom{
+  from{opacity:.15;transform:translateY(340px) scale(.78)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
 /* Five-tool allocation scene: one shared pool disperses to the two routes. */
 @media(min-width:761px){
   html body .reasoning-canvas[data-stage="4"] .tool-step,
