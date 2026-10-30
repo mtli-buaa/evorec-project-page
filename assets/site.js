@@ -138,7 +138,7 @@ const caseActions = [
   { button: 'Call Tools', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, distributed by need priority (high / medium / low = 3 / 2 / 1).' },
   { button: 'Run Retrieval', title: 'Tools are assigned to each route', detail: 'Item-CF, User-CF, and Embedding flow to BC; Embedding, BM25, and OneReason flow to NS.' },
   { button: 'Merge & Rank', title: 'Two-route retrieval completes', detail: 'BC recalls 1,800 candidates and NS recalls 1,200 candidates.' },
-  { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication precede weighted RRF over Base, SASRec, and Two-Tower rankings.' },
+  { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication are followed by three ranking models: Base, SASRec, and Two-Tower.' },
   { button: 'Enter Reflection Tree', title: '3,000 candidates returned', detail: 'The ranked recommendation list still misses the converted phone-rental item.' },
   { button: 'Match Error Type', title: 'Feedback enters the Dynamic Reflection Tree', detail: 'The tree compares the observed miss with memory, need, planning, and execution error families.' },
   { button: 'Match Leaf Pattern', title: 'ERROR-NEED is selected', detail: 'The converted item is absent because a supported user need never entered the retrieval plan.' },

@@ -167,6 +167,28 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="6"] .planner-node{opacity:0;pointer-events:none}
 }
 
+/* Stage 3: keep budget planning as a clean two-column scene.  The older
+   SVG connectors were calculated from elements hidden by this storyboard,
+   which produced dangling dashed lines at wide desktop widths. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="3"]{height:650px!important}
+  .reasoning-canvas[data-stage="3"] .reasoning-lines{display:none!important}
+  .reasoning-canvas[data-stage="3"] .recall-routes{
+    left:4%!important;right:auto!important;top:118px!important;bottom:auto!important;
+    width:38%!important;max-width:none!important;gap:20px!important
+  }
+  .reasoning-canvas[data-stage="3"] .route-card{
+    min-height:190px!important;padding:24px 26px!important
+  }
+  .reasoning-canvas[data-stage="3"] .planner-node{
+    left:56%!important;right:auto!important;top:224px!important;
+    width:30%!important;box-sizing:border-box;padding:34px 28px!important
+  }
+  .reasoning-canvas[data-stage="3"] .planner-node::before{
+    left:-74px!important;top:50%!important
+  }
+}
+
 /* Final execution layout: two routes on the left, their assigned tools on the right. */
 @media(min-width:761px){
   .reasoning-canvas[data-stage="3"],
@@ -432,6 +454,28 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="8"] .recall-routes{left:205px;right:auto;width:330px}
 }
 
+/* Final stage-3 geometry. Keep this block last: legacy storyboard rules above
+   use !important declarations and must not be allowed to reintroduce overlap. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="3"]{height:650px!important}
+  .reasoning-canvas[data-stage="3"] .reasoning-lines{display:none!important}
+  .reasoning-canvas[data-stage="3"] .recall-routes{
+    left:4%!important;right:auto!important;top:118px!important;bottom:auto!important;
+    width:38%!important;max-width:none!important;gap:20px!important
+  }
+  .reasoning-canvas[data-stage="3"] .route-card{
+    min-height:190px!important;padding:24px 26px!important
+  }
+  .reasoning-canvas[data-stage="3"] .planner-node{
+    left:56%!important;right:auto!important;top:224px!important;
+    width:30%!important;box-sizing:border-box;padding:34px 28px!important;
+    opacity:1!important;visibility:visible!important;transform:none!important
+  }
+  .reasoning-canvas[data-stage="3"] .planner-node::before{
+    left:-74px!important;top:50%!important
+  }
+}
+
 /* Stage isolation — one readable scene at a time, never overlapping. */
 @media(min-width:761px){
   .reasoning-canvas[data-stage="3"] .recall-routes,
@@ -480,5 +524,70 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="12"] .execution-flow,
   .reasoning-canvas[data-stage="12"] .recall-routes,
   .reasoning-canvas[data-stage="12"] .reflection-tree{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+}
+
+/* Stage 3 must remain a clean two-column scene after every legacy override. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="3"]{height:650px!important}
+  .reasoning-canvas[data-stage="3"] .reasoning-lines{display:none!important}
+  .reasoning-canvas[data-stage="3"] .recall-routes{
+    left:4%!important;right:auto!important;top:118px!important;bottom:auto!important;
+    width:38%!important;max-width:none!important;gap:20px!important
+  }
+  .reasoning-canvas[data-stage="3"] .route-card{min-height:190px!important;padding:24px 26px!important}
+  .reasoning-canvas[data-stage="3"] .planner-node{
+    left:56%!important;right:auto!important;top:224px!important;width:30%!important;
+    box-sizing:border-box;padding:34px 28px!important;opacity:1!important;
+    visibility:visible!important;transform:none!important
+  }
+  .reasoning-canvas[data-stage="3"] .planner-node::before{left:-74px!important;top:50%!important}
+}
+
+/* Tool assignment: each retrieval tool is its own legible card. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="4"] .tool-step,
+  .reasoning-canvas[data-stage="5"] .tool-step{
+    grid-template-rows:auto 1fr 1fr!important;gap:24px!important
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step>span,
+  .reasoning-canvas[data-stage="5"] .tool-step>span{
+    padding-left:0!important;color:#344b66!important;font-size:16px!important;font-weight:850!important
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step>div,
+  .reasoning-canvas[data-stage="5"] .tool-step>div{
+    grid-template-columns:116px repeat(3,minmax(100px,1fr))!important;
+    gap:14px!important;padding:10px 0 10px 50px!important;
+    border:0!important;border-radius:0!important;background:transparent!important
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step>div:last-child,
+  .reasoning-canvas[data-stage="5"] .tool-step>div:last-child{
+    border:0!important;background:transparent!important
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step b,
+  .reasoning-canvas[data-stage="5"] .tool-step b{
+    display:grid;min-height:58px;align-items:center;padding:6px 4px;
+    background:transparent;color:#315f86;font-size:16px!important;text-align:left
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step>div:last-child b,
+  .reasoning-canvas[data-stage="5"] .tool-step>div:last-child b{
+    background:transparent;color:#28764b
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step i,
+  .reasoning-canvas[data-stage="5"] .tool-step i{
+    min-height:72px!important;padding:12px 10px!important;border:2px solid #3984bb!important;
+    border-radius:14px!important;background:#fff!important;color:#315f86!important;
+    box-shadow:0 8px 20px #315f8614;font-size:15px!important;font-weight:850!important;line-height:1.2!important
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step>div:last-child i,
+  .reasoning-canvas[data-stage="5"] .tool-step>div:last-child i{
+    border-color:#36a15e!important;color:#28764b!important
+  }
+  .reasoning-canvas[data-stage="6"] .rank-step>span{font-size:13px!important}
+  .reasoning-canvas[data-stage="6"] .rankers{gap:12px!important}
+  .reasoning-canvas[data-stage="6"] .rankers i{
+    min-height:88px;place-content:center;padding:12px 8px;border:2px solid #e4a15b;
+    border-radius:14px;background:#fff8ef;color:#88562c;font-size:15px;font-weight:850
+  }
+  .reasoning-canvas[data-stage="6"] .rankers i small{margin-top:5px;font-size:11px}
 }
 
