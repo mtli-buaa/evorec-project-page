@@ -137,7 +137,6 @@ const caseActions = [
   { button: 'Call Tools', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
   { button: 'Run Retrieval', title: 'Tools are assigned to each route', detail: 'Item-CF, User-CF, and Embedding flow to BC; Embedding, BM25, and OneReason flow to NS.' },
   { button: 'Merge & Rank', title: 'Two-route retrieval completes', detail: 'BC recalls 1,800 candidates and NS recalls 1,200 candidates.' },
-  { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication are followed by three ranking models: Base, SASRec, and Two-Tower.' },
   { button: 'Enter Reflection Tree', title: '3,000 candidates returned', detail: 'The ranked recommendation list still misses the converted phone-rental item.' },
   { button: 'Match Error Type', title: 'Feedback enters the Dynamic Reflection Tree', detail: 'The tree compares the observed miss with memory, need, planning, and execution error families.' },
   { button: 'Match Leaf Pattern', title: 'ERROR-NEED is selected', detail: 'The converted item is absent because a supported user need never entered the retrieval plan.' },
@@ -148,9 +147,9 @@ const caseActions = [
 
 const showCaseStep = (index) => {
   caseStep = Math.max(0, Math.min(index, caseActions.length - 1));
-  // Stage 3 was the standalone budget-allocation page. It has been removed,
-  // so later actions retain their existing visual stage numbers and CSS.
-  reasoningCanvas.dataset.stage = caseStep >= 3 ? caseStep + 1 : caseStep;
+  // Standalone budget (stage 3) and rank-only (stage 6) pages were removed.
+  // Preserve the later visual-stage numbers used by the existing stylesheet.
+  reasoningCanvas.dataset.stage = caseStep >= 5 ? caseStep + 2 : caseStep >= 3 ? caseStep + 1 : caseStep;
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
