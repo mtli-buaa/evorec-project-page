@@ -1,5 +1,17 @@
 
 
+/* Stage 2: Planning Agent replaces the Need Agent in the same slot. */
+@media(min-width:761px){
+ html body .reasoning-canvas[data-stage="2"] .inference-hub{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+ html body .reasoning-canvas[data-stage="2"] .planner-node{left:410px!important;right:auto!important;top:390px!important;width:140px!important;min-height:140px!important;padding:18px 14px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;border-radius:22px!important}
+ html body .reasoning-canvas[data-stage="2"] .planner-node::before{display:none!important;content:none!important}
+ html body .reasoning-canvas[data-stage="2"] .planner-node::after{top:100%!important;height:100px!important;width:230px!important}
+ html body .reasoning-canvas[data-stage="2"] .planner-node span{font-size:10px!important}
+ html body .reasoning-canvas[data-stage="2"] .planner-node b{margin:7px 0!important;font-size:15px!important;line-height:1.2!important}
+ html body .reasoning-canvas[data-stage="2"] .planner-node small{font-size:10px!important}
+}
+
+
 /* Compact stage-2 planner: keep clear of inferred needs. */
 @media(min-width:761px){
   html body .reasoning-canvas[data-stage="2"] .planner-node{left:calc(50% - 95px)!important;right:auto!important;top:500px!important;width:190px!important;padding:15px 17px!important;border-width:2px!important;border-radius:16px!important;opacity:1!important;visibility:visible!important;transform:none!important;box-shadow:0 8px 20px #8d3e6218!important}
