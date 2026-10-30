@@ -167,6 +167,46 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="6"] .planner-node{opacity:0;pointer-events:none}
 }
 
+/* Desktop header safe area: long stage captions must never cover scene content. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="3"] .recall-routes,
+  .reasoning-canvas[data-stage="4"] .recall-routes,
+  .reasoning-canvas[data-stage="5"] .recall-routes,
+  .reasoning-canvas[data-stage="6"] .recall-routes,
+  .reasoning-canvas[data-stage="7"] .recall-routes{top:220px!important}
+
+  .reasoning-canvas[data-stage="3"] .route-card,
+  .reasoning-canvas[data-stage="4"] .route-card,
+  .reasoning-canvas[data-stage="5"] .route-card,
+  .reasoning-canvas[data-stage="6"] .route-card,
+  .reasoning-canvas[data-stage="7"] .route-card{min-height:235px!important}
+
+  .reasoning-canvas[data-stage="3"] .planner-node{top:365px!important}
+
+  .reasoning-canvas[data-stage="4"] .execution-flow,
+  .reasoning-canvas[data-stage="5"] .execution-flow,
+  .reasoning-canvas[data-stage="6"] .execution-flow{
+    top:220px!important;min-height:500px!important
+  }
+  .reasoning-canvas[data-stage="4"] .tool-step,
+  .reasoning-canvas[data-stage="5"] .tool-step{height:500px!important;gap:22px!important}
+
+  .reasoning-canvas[data-stage="7"] .result-list{top:220px!important}
+
+  .reasoning-canvas[data-stage="8"] .reflection-tree,
+  .reasoning-canvas[data-stage="9"] .reflection-tree,
+  .reasoning-canvas[data-stage="10"] .reflection-tree{
+    top:210px!important;min-height:620px!important;padding-top:28px!important;padding-bottom:28px!important
+  }
+
+  .reasoning-canvas[data-stage="11"] .result-list,
+  .reasoning-canvas[data-stage="12"] .result-list,
+  .reasoning-canvas[data-stage="11"] .reflection-cluster,
+  .reasoning-canvas[data-stage="12"] .reflection-cluster{top:220px!important}
+  .reasoning-canvas[data-stage="11"] .result-list,
+  .reasoning-canvas[data-stage="11"] .reflection-cluster{min-height:500px!important}
+}
+
 /* Stage 3: keep budget planning as a clean two-column scene.  The older
    SVG connectors were calculated from elements hidden by this storyboard,
    which produced dangling dashed lines at wide desktop widths. */
@@ -707,5 +747,35 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
     display:block;margin:18px 0;padding:18px!important;font-size:17px!important
   }
   .reasoning-canvas[data-stage="11"] .reflection-cluster small{font-size:14px!important;line-height:1.6!important}
+}
+
+/* Final desktop header safe area — intentionally last in this stylesheet. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="3"] .recall-routes,
+  .reasoning-canvas[data-stage="4"] .recall-routes,
+  .reasoning-canvas[data-stage="5"] .recall-routes,
+  .reasoning-canvas[data-stage="6"] .recall-routes,
+  .reasoning-canvas[data-stage="7"] .recall-routes{top:220px!important}
+  .reasoning-canvas[data-stage="3"] .route-card,
+  .reasoning-canvas[data-stage="4"] .route-card,
+  .reasoning-canvas[data-stage="5"] .route-card,
+  .reasoning-canvas[data-stage="6"] .route-card,
+  .reasoning-canvas[data-stage="7"] .route-card{min-height:235px!important}
+  .reasoning-canvas[data-stage="3"] .planner-node{top:365px!important}
+  .reasoning-canvas[data-stage="4"] .execution-flow,
+  .reasoning-canvas[data-stage="5"] .execution-flow,
+  .reasoning-canvas[data-stage="6"] .execution-flow{top:220px!important;min-height:500px!important}
+  .reasoning-canvas[data-stage="4"] .tool-step,
+  .reasoning-canvas[data-stage="5"] .tool-step{height:500px!important;gap:22px!important}
+  .reasoning-canvas[data-stage="7"] .result-list{top:220px!important}
+  .reasoning-canvas[data-stage="8"] .reflection-tree,
+  .reasoning-canvas[data-stage="9"] .reflection-tree,
+  .reasoning-canvas[data-stage="10"] .reflection-tree{top:210px!important;min-height:620px!important;padding-top:28px!important;padding-bottom:28px!important}
+  .reasoning-canvas[data-stage="11"] .result-list,
+  .reasoning-canvas[data-stage="12"] .result-list,
+  .reasoning-canvas[data-stage="11"] .reflection-cluster,
+  .reasoning-canvas[data-stage="12"] .reflection-cluster{top:220px!important}
+  .reasoning-canvas[data-stage="11"] .result-list,
+  .reasoning-canvas[data-stage="11"] .reflection-cluster{min-height:500px!important}
 }
 
