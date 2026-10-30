@@ -167,6 +167,32 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="6"] .planner-node{opacity:0;pointer-events:none}
 }
 
+/* Replay closes the repair loop: reinsert the repaired need, rerun, then verify success. */
+.reflection-cluster .repair-verified{display:none}
+.reasoning-canvas[data-stage="12"] .reflection-cluster .repair-pending{display:none}
+.reasoning-canvas[data-stage="12"] .reflection-cluster .repair-verified{display:block;color:#23824c;font-weight:800}
+.reasoning-canvas[data-stage="12"] .result-list li.target{border:2px solid #36a15e!important;background:#eaf8ee!important}
+.reasoning-canvas[data-stage="12"] .result-list .target-rank{font-size:0!important;color:#23824c!important}
+.reasoning-canvas[data-stage="12"] .result-list .target-rank::after{content:"23"!important;font-size:13px!important;font-weight:850}
+.reasoning-canvas[data-stage="12"] .result-list .not-recalled{display:none!important}
+.reasoning-canvas[data-stage="12"] .result-list .replayed{display:block!important;color:#23824c!important;font-weight:850}
+.reasoning-canvas[data-stage="12"] .reflection-cluster{border-color:#36a15e!important;background:#edf9f0!important;box-shadow:0 0 0 5px #36a15e20!important}
+
+/* Final ranking-only override. */
+@media(min-width:761px){
+  .reasoning-canvas[data-stage="6"] .execution-flow{display:block!important;left:calc(40% + 64px)!important;right:32px!important;top:220px!important;min-height:500px!important;padding:24px!important}
+  .reasoning-canvas[data-stage="6"] .rank-step{display:flex!important;width:100%!important;height:452px!important;box-sizing:border-box!important;padding:42px 34px!important;overflow:hidden!important}
+  .reasoning-canvas[data-stage="6"] .rank-step>span{margin-bottom:28px!important;font-size:22px!important}
+  .reasoning-canvas[data-stage="6"] .rankers{width:100%!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+  .reasoning-canvas[data-stage="6"] .rankers i{min-width:0!important;min-height:190px!important;padding:26px 10px!important;box-sizing:border-box!important;place-content:center!important;font-size:20px!important;overflow-wrap:anywhere!important}
+  .reasoning-canvas[data-stage="6"] .rankers i small{font-size:14px!important}
+}
+@media(max-width:760px){
+  .reasoning-canvas[data-stage="6"] .execution-flow{display:block!important}
+  .reasoning-canvas[data-stage="6"] .rank-step{display:flex!important;width:100%!important;box-sizing:border-box!important}
+  .reasoning-canvas[data-stage="6"] .rankers{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
 /* Desktop header safe area: long stage captions must never cover scene content. */
 @media(min-width:761px){
   .reasoning-canvas[data-stage="3"] .recall-routes,
