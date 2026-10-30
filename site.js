@@ -94,6 +94,95 @@ const memoryInputs = [
   [reasoningCanvas.querySelector('.wm-memory-v2'), reasoningLines.querySelector('.working-input')]
 ];
 
+/* Interactive Memory Context — stage 0 only. */
+const memoryContextPage = document.querySelector('#memory-context-page');
+const memoryCards = [...memoryContextPage.querySelectorAll('.mc-card')];
+const exploreMemoryFlow = document.querySelector('#explore-memory-flow');
+let memoryFlowTimers = [];
+
+const clearMemoryHighlight = (kind) => {
+  memoryContextPage.classList.remove(`focus-${kind}`);
+};
+const setMemoryHighlight = (kind) => {
+  memoryContextPage.classList.add(`focus-${kind}`);
+};
+const cancelMemoryFlow = () => {
+  memoryFlowTimers.forEach(clearTimeout);
+  memoryFlowTimers = [];
+  memoryContextPage.classList.remove('flow-long', 'flow-short', 'flow-working', 'flow-complete');
+  exploreMemoryFlow.disabled = false;
+};
+
+memoryCards.forEach((card) => {
+  const kind = card.dataset.memory;
+  const toggle = card.querySelector('.mc-card-toggle');
+  toggle.addEventListener('click', () => {
+    const open = card.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    card.classList.toggle('is-selected', open);
+  });
+  ['mouseenter', 'focusin'].forEach((name) => card.addEventListener(name, () => setMemoryHighlight(kind)));
+  card.addEventListener('mouseleave', () => clearMemoryHighlight(kind));
+  card.addEventListener('focusout', (event) => {
+    if (!card.contains(event.relatedTarget)) clearMemoryHighlight(kind);
+  });
+});
+
+memoryContextPage.querySelectorAll('[data-summary]').forEach((summary) => {
+  const kind = summary.dataset.summary;
+  summary.addEventListener('mouseenter', () => setMemoryHighlight(kind));
+  summary.addEventListener('mouseleave', () => clearMemoryHighlight(kind));
+});
+
+const eventDetail = memoryContextPage.querySelector('.mc-event-detail');
+memoryContextPage.querySelectorAll('[data-event]').forEach((item) => {
+  item.addEventListener('click', () => {
+    memoryContextPage.querySelectorAll('[data-event]').forEach((node) => node.classList.toggle('is-selected', node === item));
+    const [title, action, time, description] = item.dataset.event.split('|');
+    eventDetail.querySelector('b').textContent = title;
+    eventDetail.querySelector('small').textContent = `${action} · ${time}`;
+    eventDetail.querySelector('p').textContent = description;
+    eventDetail.hidden = false;
+  });
+});
+eventDetail.querySelector('button').addEventListener('click', () => {
+  eventDetail.hidden = true;
+  memoryContextPage.querySelectorAll('[data-event]').forEach((node) => node.classList.remove('is-selected'));
+});
+
+const repairDetail = memoryContextPage.querySelector('.mc-repair-detail');
+memoryContextPage.querySelectorAll('[data-repair]').forEach((item) => {
+  item.addEventListener('click', () => {
+    memoryContextPage.querySelectorAll('[data-repair]').forEach((node) => node.classList.toggle('is-selected', node === item));
+    const [title, description] = item.dataset.repair.split('|');
+    repairDetail.querySelector('b').textContent = title;
+    repairDetail.querySelector('p').textContent = description;
+    repairDetail.hidden = false;
+  });
+});
+repairDetail.querySelector('button').addEventListener('click', () => {
+  repairDetail.hidden = true;
+  memoryContextPage.querySelectorAll('[data-repair]').forEach((node) => node.classList.remove('is-selected'));
+});
+
+exploreMemoryFlow.addEventListener('click', () => {
+  cancelMemoryFlow();
+  exploreMemoryFlow.disabled = true;
+  const phases = ['long', 'short', 'working'];
+  phases.forEach((kind, index) => {
+    memoryFlowTimers.push(setTimeout(() => {
+      memoryContextPage.classList.remove('flow-long', 'flow-short', 'flow-working');
+      memoryContextPage.classList.add(`flow-${kind}`);
+      memoryContextPage.querySelector(`.mc-dot-${kind} animateMotion`)?.beginElement();
+    }, index * 850));
+  });
+  memoryFlowTimers.push(setTimeout(() => {
+    memoryContextPage.classList.remove('flow-long', 'flow-short', 'flow-working');
+    memoryContextPage.classList.add('flow-complete');
+    exploreMemoryFlow.disabled = false;
+  }, 2550));
+});
+
 const updateMemoryConnectors = () => {
   const canvasRect = reasoningCanvas.getBoundingClientRect();
   const hubRect = inferenceHub.getBoundingClientRect();
@@ -148,6 +237,7 @@ const caseActions = [
 ];
 
 const showCaseStep = (index) => {
+  if (index !== 0) cancelMemoryFlow();
   caseStep = Math.max(0, Math.min(index, caseActions.length - 1));
   reasoningCanvas.dataset.stage = caseStep;
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
