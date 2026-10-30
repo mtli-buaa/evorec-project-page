@@ -80,27 +80,71 @@ const reasoningCanvas = document.querySelector('#reasoning-canvas');
 const caseAction = document.querySelector('#case-action');
 const caseReset = document.querySelector('#case-reset');
 const caseStageCaption = document.querySelector('#case-stage-caption');
-const behaviorNodes = [...document.querySelectorAll('.memory-node')];
-const behaviorDetail = document.querySelector('#behavior-detail');
-const behaviorDetailClose = document.querySelector('#behavior-detail-close');
-const behaviorDetailFields = {
-  title: document.querySelector('#behavior-detail-title'),
-  time: document.querySelector('#behavior-detail-time'),
-  action: document.querySelector('#behavior-detail-action'),
-  sid: document.querySelector('#behavior-detail-sid'),
-  conversion: document.querySelector('#behavior-detail-conversion'),
-  copy: document.querySelector('#behavior-detail-copy')
+const shortTermMemory = document.querySelector('#short-term-memory');
+const shortTermToggle = document.querySelector('#short-term-toggle');
+const longTermMemory = document.querySelector('#long-term-memory');
+const reasoningLines = reasoningCanvas.querySelector('.reasoning-lines');
+const inferenceHub = reasoningCanvas.querySelector('.inference-hub');
+const needNodes = [...reasoningCanvas.querySelectorAll('.need-node')];
+const needBudgetPaths = [...reasoningLines.querySelectorAll('.need-budget-paths path')];
+const needSatisfactionRoute = reasoningCanvas.querySelector('.ns-route');
+const memoryInputs = [
+  [reasoningCanvas.querySelector('.lt-memory-v2'), reasoningLines.querySelector('.long-input')],
+  [reasoningCanvas.querySelector('.st-memory-v2'), reasoningLines.querySelector('.short-input')],
+  [reasoningCanvas.querySelector('.wm-memory-v2'), reasoningLines.querySelector('.working-input')]
+];
+
+const updateMemoryConnectors = () => {
+  const canvasRect = reasoningCanvas.getBoundingClientRect();
+  const hubRect = inferenceHub.getBoundingClientRect();
+  if (!canvasRect.width || !canvasRect.height) return;
+  const scaleX = 1000 / canvasRect.width;
+  const scaleY = 900 / canvasRect.height;
+  const targetX = (hubRect.left - canvasRect.left + 2) * scaleX;
+  const targetY = (hubRect.top - canvasRect.top + hubRect.height / 2) * scaleY;
+  memoryInputs.forEach(([card, path]) => {
+    const rect = card.getBoundingClientRect();
+    const startX = (rect.right - canvasRect.left - 2) * scaleX;
+    const startY = (rect.top - canvasRect.top + rect.height / 2) * scaleY;
+    const bend = Math.max(28, (targetX - startX) * 0.48);
+    path.setAttribute('d', `M${startX.toFixed(1)} ${startY.toFixed(1)} C${(startX + bend).toFixed(1)} ${startY.toFixed(1)} ${(targetX - bend).toFixed(1)} ${targetY.toFixed(1)} ${targetX.toFixed(1)} ${targetY.toFixed(1)}`);
+  });
+  const routeRect = needSatisfactionRoute.getBoundingClientRect();
+  const routeX = (routeRect.left - canvasRect.left + routeRect.width * .72) * scaleX;
+  const routeY = (routeRect.top - canvasRect.top + 2) * scaleY;
+  needNodes.forEach((node, index) => {
+    const rect = node.getBoundingClientRect();
+    const startX = (rect.right - canvasRect.left - 3) * scaleX;
+    const startY = (rect.top - canvasRect.top + rect.height / 2) * scaleY;
+    const spreadX = routeX + (index - 2.5) * 5;
+    const controlY = startY + Math.max(35, (routeY - startY) * .48);
+    needBudgetPaths[index].setAttribute('d', `M${startX.toFixed(1)} ${startY.toFixed(1)} C${(startX + 38).toFixed(1)} ${startY.toFixed(1)} ${spreadX.toFixed(1)} ${controlY.toFixed(1)} ${spreadX.toFixed(1)} ${routeY.toFixed(1)}`);
+  });
 };
+
+addEventListener('resize', updateMemoryConnectors);
+if ('ResizeObserver' in window) {
+  const connectorObserver = new ResizeObserver(() => requestAnimationFrame(updateMemoryConnectors));
+  connectorObserver.observe(reasoningCanvas);
+  connectorObserver.observe(shortTermMemory);
+  connectorObserver.observe(longTermMemory);
+}
 let caseStep = 0;
 let caseTransitioning = false;
 const caseActions = [
-  { button: 'Infer Needs', title: 'Start with behavior sequence', detail: 'Time-ordered video interactions are the evidence for need inference.' },
-  { button: 'Open Recall Routes', title: 'Needs inferred from behavior', detail: 'The Need Agent maps timestamped P3S interactions to structured needs.' },
+  { button: 'Infer Needs', title: 'Memory context', detail: 'Long-term profile, short-term behavior, and working context jointly support need inference.' },
+  { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent combines stable traits with recent timestamped P3S interactions.' },
   { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
-  { button: 'Run Retrieval', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, split equally across six needs.' },
-  { button: 'Diagnose Miss', title: '3,000 candidates returned', detail: 'Both routes fully use their budgets, but neither recalls the converted phone-rental item.' },
-  { button: 'Generate Repair', title: 'Reflection matches ERROR-NEED-001', detail: 'Supporting evidence entered the Need Agent, but the phone-acquisition need was omitted.' },
-  { button: 'Restart', title: 'Personalized repair generated', detail: 'Cross-check cash-flow pressure, price sensitivity, and durable-goods acquisition; replay remains pending.' }
+  { button: 'Call Tools', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, distributed by need priority (high / medium / low = 3 / 2 / 1).' },
+  { button: 'Run Retrieval', title: 'Execute retrieval and ranking', detail: 'The Acting Executor retrieves candidates with the planned tools, applies route-level RRF fusion, then merges and ranks the final recommendations.' },
+  { button: 'Merge & Rank', title: 'Two-route retrieval completes', detail: 'BC recalls 1,800 candidates and NS recalls 1,200 candidates.' },
+  { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication are followed by three ranking models: Base, SASRec, and Two-Tower.' },
+  { button: 'Enter Reflection Tree', title: '3,000 candidates returned', detail: 'The ranked recommendation list still misses the converted phone-rental item.' },
+  { button: 'Match Error Type', title: 'Feedback enters the Dynamic Reflection Tree', detail: 'The tree compares the observed miss with memory, need, planning, and execution error families.' },
+  { button: 'Match Leaf Pattern', title: 'ERROR-NEED is selected', detail: 'The converted item is absent because a supported user need never entered the retrieval plan.' },
+  { button: 'Generate Repair', title: 'ERROR-NEED-001 is matched', detail: 'The leaf pattern states: supporting evidence is present, but the corresponding need was omitted.' },
+  { button: 'Re-run Recommendation', title: 'Repair reinserted into the pipeline', detail: 'The missing phone-rental need is added back to Need Agent output, and the Plan Agent reallocates retrieval budget for replay.' },
+  { button: 'Restart', title: 'Reflection repair closes the loop', detail: 'The reflection node enters Working Memory, triggers Need Agent reasoning again, and the rerun returns the correct phone-rental result at Rank 23.' }
 ];
 
 const showCaseStep = (index) => {
@@ -109,20 +153,27 @@ const showCaseStep = (index) => {
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
-  if (caseStep > 0) behaviorDetail.classList.add('is-hidden');
+  if (caseStep > 0) {
+    longTermMemory.removeAttribute('open');
+    shortTermMemory.classList.remove('is-open');
+    shortTermToggle.setAttribute('aria-expanded', 'false');
+  }
 };
-const showBehaviorDetail = (node) => {
-  behaviorNodes.forEach((item) => item.classList.toggle('is-selected', item === node));
-  behaviorDetailFields.title.textContent = node.dataset.title;
-  behaviorDetailFields.time.textContent = node.dataset.time;
-  behaviorDetailFields.action.textContent = node.dataset.action;
-  behaviorDetailFields.sid.textContent = node.dataset.sid;
-  behaviorDetailFields.conversion.textContent = node.dataset.conversion;
-  behaviorDetailFields.copy.textContent = node.dataset.detail;
-  behaviorDetail.classList.remove('is-hidden');
-};
-behaviorNodes.forEach((node) => node.addEventListener('click', () => showBehaviorDetail(node)));
-behaviorDetailClose.addEventListener('click', () => behaviorDetail.classList.add('is-hidden'));
+longTermMemory.addEventListener('toggle', () => {
+  if (longTermMemory.open) {
+    shortTermMemory.classList.remove('is-open');
+    shortTermToggle.setAttribute('aria-expanded', 'false');
+  }
+  requestAnimationFrame(updateMemoryConnectors);
+});
+shortTermToggle.addEventListener('click', () => {
+  const open = shortTermMemory.classList.toggle('is-open');
+  shortTermToggle.setAttribute('aria-expanded', String(open));
+  if (open) {
+    longTermMemory.removeAttribute('open');
+  }
+  requestAnimationFrame(updateMemoryConnectors);
+});
 const advanceCase = () => {
   if (caseTransitioning) return;
   if (caseStep === caseActions.length - 1) {
@@ -137,3 +188,4 @@ const advanceCase = () => {
 caseAction.addEventListener('click', advanceCase);
 caseReset.addEventListener('click', () => { caseTransitioning = false; caseAction.disabled = false; showCaseStep(0); });
 showCaseStep(0);
+requestAnimationFrame(updateMemoryConnectors);
