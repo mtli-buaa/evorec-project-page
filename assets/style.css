@@ -1155,11 +1155,11 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   html body .reasoning-canvas[data-stage="4"] .tool-pool{position:absolute!important;z-index:3!important;inset:0!important;display:block!important;width:100%!important;height:900px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
   html body .reasoning-canvas[data-stage="4"] .tool-pool::before,html body .reasoning-canvas[data-stage="4"] .tool-pool::after{display:none!important;content:none!important}
   html body .reasoning-canvas[data-stage="4"] .tool-pool i{position:absolute!important;width:14%!important;min-height:82px!important;margin:0!important;box-sizing:border-box!important;border-radius:16px!important;font-size:15px!important;animation-duration:1.6s!important;animation-timing-function:cubic-bezier(.2,.75,.2,1)!important;animation-fill-mode:both!important}
-  html body .reasoning-canvas[data-stage="4"] .tool-item-cf{left:43%!important;top:205px!important;animation-name:pool-final-item!important;animation-delay:.8s!important}
-  html body .reasoning-canvas[data-stage="4"] .tool-user-cf{left:59%!important;top:205px!important;animation-name:pool-final-user!important;animation-delay:1s!important}
-  html body .reasoning-canvas[data-stage="4"] .tool-embedding{left:75%!important;top:390px!important;animation-name:pool-final-embedding!important;animation-delay:1.2s!important}
-  html body .reasoning-canvas[data-stage="4"] .tool-bm25{left:43%!important;top:575px!important;animation-name:pool-final-bm25!important;animation-delay:1.4s!important}
-  html body .reasoning-canvas[data-stage="4"] .tool-one-reason{left:59%!important;top:575px!important;animation-name:pool-final-one!important;animation-delay:1.6s!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i:nth-child(1){left:43%!important;top:205px!important;animation:pool-final-item 1.6s .8s cubic-bezier(.2,.75,.2,1) both!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i:nth-child(2){left:59%!important;top:205px!important;animation:pool-final-user 1.6s 1s cubic-bezier(.2,.75,.2,1) both!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i:nth-child(3){left:75%!important;top:390px!important;animation:pool-final-embedding 1.6s 1.2s cubic-bezier(.2,.75,.2,1) both!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i:nth-child(4){left:43%!important;top:575px!important;animation:pool-final-bm25 1.6s 1.4s cubic-bezier(.2,.75,.2,1) both!important}
+  html body .reasoning-canvas[data-stage="4"] .tool-pool i:nth-child(5){left:59%!important;top:575px!important;animation:pool-final-one 1.6s 1.6s cubic-bezier(.2,.75,.2,1) both!important}
 }
 @keyframes pool-final-item{from{transform:translate(-265%,610px) scale(.88)}to{transform:none}}
 @keyframes pool-final-user{from{transform:translate(-220%,610px) scale(.88)}to{transform:none}}
