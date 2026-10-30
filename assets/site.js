@@ -94,95 +94,6 @@ const memoryInputs = [
   [reasoningCanvas.querySelector('.wm-memory-v2'), reasoningLines.querySelector('.working-input')]
 ];
 
-/* Interactive Memory Context — stage 0 only. */
-const memoryContextPage = document.querySelector('#memory-context-page');
-const memoryCards = [...memoryContextPage.querySelectorAll('.mc-card')];
-const exploreMemoryFlow = document.querySelector('#explore-memory-flow');
-let memoryFlowTimers = [];
-
-const clearMemoryHighlight = (kind) => {
-  memoryContextPage.classList.remove(`focus-${kind}`);
-};
-const setMemoryHighlight = (kind) => {
-  memoryContextPage.classList.add(`focus-${kind}`);
-};
-const cancelMemoryFlow = () => {
-  memoryFlowTimers.forEach(clearTimeout);
-  memoryFlowTimers = [];
-  memoryContextPage.classList.remove('flow-long', 'flow-short', 'flow-working', 'flow-complete');
-  exploreMemoryFlow.disabled = false;
-};
-
-memoryCards.forEach((card) => {
-  const kind = card.dataset.memory;
-  const toggle = card.querySelector('.mc-card-toggle');
-  toggle.addEventListener('click', () => {
-    const open = card.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', String(open));
-    card.classList.toggle('is-selected', open);
-  });
-  ['mouseenter', 'focusin'].forEach((name) => card.addEventListener(name, () => setMemoryHighlight(kind)));
-  card.addEventListener('mouseleave', () => clearMemoryHighlight(kind));
-  card.addEventListener('focusout', (event) => {
-    if (!card.contains(event.relatedTarget)) clearMemoryHighlight(kind);
-  });
-});
-
-memoryContextPage.querySelectorAll('[data-summary]').forEach((summary) => {
-  const kind = summary.dataset.summary;
-  summary.addEventListener('mouseenter', () => setMemoryHighlight(kind));
-  summary.addEventListener('mouseleave', () => clearMemoryHighlight(kind));
-});
-
-const eventDetail = memoryContextPage.querySelector('.mc-event-detail');
-memoryContextPage.querySelectorAll('[data-event]').forEach((item) => {
-  item.addEventListener('click', () => {
-    memoryContextPage.querySelectorAll('[data-event]').forEach((node) => node.classList.toggle('is-selected', node === item));
-    const [title, action, time, description] = item.dataset.event.split('|');
-    eventDetail.querySelector('b').textContent = title;
-    eventDetail.querySelector('small').textContent = `${action} · ${time}`;
-    eventDetail.querySelector('p').textContent = description;
-    eventDetail.hidden = false;
-  });
-});
-eventDetail.querySelector('button').addEventListener('click', () => {
-  eventDetail.hidden = true;
-  memoryContextPage.querySelectorAll('[data-event]').forEach((node) => node.classList.remove('is-selected'));
-});
-
-const repairDetail = memoryContextPage.querySelector('.mc-repair-detail');
-memoryContextPage.querySelectorAll('[data-repair]').forEach((item) => {
-  item.addEventListener('click', () => {
-    memoryContextPage.querySelectorAll('[data-repair]').forEach((node) => node.classList.toggle('is-selected', node === item));
-    const [title, description] = item.dataset.repair.split('|');
-    repairDetail.querySelector('b').textContent = title;
-    repairDetail.querySelector('p').textContent = description;
-    repairDetail.hidden = false;
-  });
-});
-repairDetail.querySelector('button').addEventListener('click', () => {
-  repairDetail.hidden = true;
-  memoryContextPage.querySelectorAll('[data-repair]').forEach((node) => node.classList.remove('is-selected'));
-});
-
-exploreMemoryFlow.addEventListener('click', () => {
-  cancelMemoryFlow();
-  exploreMemoryFlow.disabled = true;
-  const phases = ['long', 'short', 'working'];
-  phases.forEach((kind, index) => {
-    memoryFlowTimers.push(setTimeout(() => {
-      memoryContextPage.classList.remove('flow-long', 'flow-short', 'flow-working');
-      memoryContextPage.classList.add(`flow-${kind}`);
-      memoryContextPage.querySelector(`.mc-dot-${kind} animateMotion`)?.beginElement();
-    }, index * 850));
-  });
-  memoryFlowTimers.push(setTimeout(() => {
-    memoryContextPage.classList.remove('flow-long', 'flow-short', 'flow-working');
-    memoryContextPage.classList.add('flow-complete');
-    exploreMemoryFlow.disabled = false;
-  }, 2550));
-});
-
 const updateMemoryConnectors = () => {
   const canvasRect = reasoningCanvas.getBoundingClientRect();
   const hubRect = inferenceHub.getBoundingClientRect();
@@ -225,7 +136,7 @@ const caseActions = [
   { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent combines stable traits with recent timestamped P3S interactions.' },
   { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
   { button: 'Call Tools', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, distributed by need priority (high / medium / low = 3 / 2 / 1).' },
-  { button: 'Run Retrieval', title: 'Execute retrieval and ranking', detail: 'The Acting Executor retrieves candidates with the planned tools, applies route-level RRF fusion, then merges and ranks the final recommendations.' },
+  { button: 'Run Retrieval', title: 'Tools are assigned to each route', detail: 'Item-CF, User-CF, and Embedding flow to BC; Embedding, BM25, and OneReason flow to NS.' },
   { button: 'Merge & Rank', title: 'Two-route retrieval completes', detail: 'BC recalls 1,800 candidates and NS recalls 1,200 candidates.' },
   { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication are followed by three ranking models: Base, SASRec, and Two-Tower.' },
   { button: 'Enter Reflection Tree', title: '3,000 candidates returned', detail: 'The ranked recommendation list still misses the converted phone-rental item.' },
@@ -237,7 +148,6 @@ const caseActions = [
 ];
 
 const showCaseStep = (index) => {
-  if (index !== 0) cancelMemoryFlow();
   caseStep = Math.max(0, Math.min(index, caseActions.length - 1));
   reasoningCanvas.dataset.stage = caseStep;
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
