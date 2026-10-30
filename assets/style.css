@@ -659,5 +659,53 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="12"] .reflection-cluster{
     left:calc(40% + 64px)!important;right:32px!important;top:138px!important;padding:30px!important
   }
+
+  /* Reflection scenes always carry visible information; later clicks refine
+     the match instead of revealing content from an otherwise empty canvas. */
+  .reasoning-canvas[data-stage="8"] .reflection-tree,
+  .reasoning-canvas[data-stage="9"] .reflection-tree,
+  .reasoning-canvas[data-stage="10"] .reflection-tree{
+    min-height:650px!important;align-content:start!important
+  }
+  .reasoning-canvas[data-stage="8"] .tree-categories{
+    opacity:.42!important;transform:none!important
+  }
+  .reasoning-canvas[data-stage="8"] .tree-link-one{
+    opacity:.45!important
+  }
+  .reasoning-canvas[data-stage="9"] .tree-leaves{
+    opacity:.38!important;transform:none!important
+  }
+  .reasoning-canvas[data-stage="9"] .tree-link-two{
+    opacity:.45!important
+  }
+  .reasoning-canvas[data-stage="8"] .tree-title b,
+  .reasoning-canvas[data-stage="9"] .tree-title b,
+  .reasoning-canvas[data-stage="10"] .tree-title b{font-size:22px!important}
+  .reasoning-canvas[data-stage="8"] .tree-root,
+  .reasoning-canvas[data-stage="9"] .tree-root,
+  .reasoning-canvas[data-stage="10"] .tree-root{
+    min-width:58%!important;margin-top:28px!important;padding:20px 26px!important
+  }
+  .reasoning-canvas[data-stage="8"] .tree-root b,
+  .reasoning-canvas[data-stage="9"] .tree-root b,
+  .reasoning-canvas[data-stage="10"] .tree-root b{font-size:16px!important}
+  .reasoning-canvas[data-stage="10"] .tree-match{
+    min-width:62%!important;margin-top:26px!important;padding:20px 26px!important
+  }
+  .reasoning-canvas[data-stage="10"] .tree-match b{font-size:16px!important}
+
+  .reasoning-canvas[data-stage="11"] .result-list,
+  .reasoning-canvas[data-stage="11"] .reflection-cluster{
+    min-height:540px!important;box-sizing:border-box
+  }
+  .reasoning-canvas[data-stage="11"] .reflection-cluster{
+    display:flex!important;flex-direction:column;justify-content:center!important
+  }
+  .reasoning-canvas[data-stage="11"] .reflection-cluster b{font-size:21px!important}
+  .reasoning-canvas[data-stage="11"] .reflection-cluster strong{
+    display:block;margin:18px 0;padding:18px!important;font-size:17px!important
+  }
+  .reasoning-canvas[data-stage="11"] .reflection-cluster small{font-size:14px!important;line-height:1.6!important}
 }
 
