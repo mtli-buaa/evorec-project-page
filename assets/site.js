@@ -134,8 +134,7 @@ let caseTransitioning = false;
 const caseActions = [
   { button: 'Infer Needs', title: 'Memory context', detail: 'Long-term profile, short-term behavior, and working context jointly support need inference.' },
   { button: 'Open Recall Routes', title: 'Needs inferred from memory', detail: 'The Need Agent combines stable traits with recent timestamped P3S interactions.' },
-  { button: 'Allocate Budget', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
-  { button: 'Call Tools', title: 'Plan allocates the 3,000 budget', detail: 'BC receives 1,800; NS receives 1,200, distributed by need priority (high / medium / low = 3 / 2 / 1).' },
+  { button: 'Call Tools', title: 'Two recall routes', detail: 'Behavior evidence flows to BC; six inferred needs flow to NS.' },
   { button: 'Run Retrieval', title: 'Tools are assigned to each route', detail: 'Item-CF, User-CF, and Embedding flow to BC; Embedding, BM25, and OneReason flow to NS.' },
   { button: 'Merge & Rank', title: 'Two-route retrieval completes', detail: 'BC recalls 1,800 candidates and NS recalls 1,200 candidates.' },
   { button: 'Inspect Results', title: 'Candidates are merged and ranked', detail: 'Snake-order interleaving and deduplication are followed by three ranking models: Base, SASRec, and Two-Tower.' },
@@ -149,7 +148,9 @@ const caseActions = [
 
 const showCaseStep = (index) => {
   caseStep = Math.max(0, Math.min(index, caseActions.length - 1));
-  reasoningCanvas.dataset.stage = caseStep;
+  // Stage 3 was the standalone budget-allocation page. It has been removed,
+  // so later actions retain their existing visual stage numbers and CSS.
+  reasoningCanvas.dataset.stage = caseStep >= 3 ? caseStep + 1 : caseStep;
   caseStageCaption.innerHTML = `<b>${caseActions[caseStep].title}</b><span>${caseActions[caseStep].detail}</span>`;
   caseAction.innerHTML = `${caseActions[caseStep].button} <span>→</span>`;
   caseReset.disabled = caseStep === 0;
