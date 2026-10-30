@@ -193,6 +193,10 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="6"] .rankers{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 
+/* Final repair-loop scene: reflection updates working memory before reasoning again. */
+.repair-loop{position:absolute;z-index:9;left:32px;right:32px;top:250px;display:grid;grid-template-columns:minmax(0,1.08fr) 34px minmax(0,1.08fr) 34px minmax(0,1.08fr) 34px minmax(0,1fr) 34px minmax(0,1.08fr);align-items:stretch;gap:8px;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .45s ease,transform .55s ease}.repair-loop-node{position:relative;display:flex;min-width:0;min-height:270px;box-sizing:border-box;flex-direction:column;justify-content:center;padding:28px 18px;border:3px solid #e08c45;border-radius:18px;background:#fff4e8;text-align:center;box-shadow:0 14px 30px #8a4e1d17}.repair-loop-node>span{display:grid;place-items:center;width:38px;height:38px;margin:0 auto 16px;border-radius:50%;background:#e6882e;color:#fff;font:850 17px Inter,sans-serif}.repair-loop-node small{color:#a15b27;font:850 11px/1.2 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase}.repair-loop-node b{margin:8px 0 7px;color:#26333c;font-size:18px;line-height:1.25}.repair-loop-node p{margin:0;color:#61707b;font:650 12px/1.55 Inter,sans-serif}.repair-loop-arrow{display:grid;place-items:center;color:#4c91bd;font-size:30px;font-weight:900}.working-node{border-color:#3984bb;background:#edf6fc}.working-node>span{background:#3984bb}.working-node small{color:#2e6e9a}.inference-node{border-color:#36a15e;background:#edf9f0}.inference-node>span{background:#36a15e}.inference-node small{color:#287f48}.execute-node{border-color:#6c75c8;background:#f1f1fc}.execute-node>span{background:#6c75c8}.execute-node small{color:#555eae}.success-node{border-color:#259452;background:#e6f7eb;box-shadow:0 0 0 6px #36a15e20,0 15px 34px #247d4226}.success-node>span{background:#259452}.success-node small{color:#207641}.reasoning-canvas[data-stage="12"] .repair-loop{opacity:1;transform:none;pointer-events:auto}.reasoning-canvas[data-stage="12"] .result-list,.reasoning-canvas[data-stage="12"] .reflection-cluster{opacity:0!important;visibility:hidden!important;pointer-events:none!important}.reasoning-canvas[data-stage="12"]{height:760px!important}
+@media(max-width:760px){.reasoning-canvas[data-stage="12"]{height:1450px!important}.repair-loop{left:18px;right:18px;top:190px;grid-template-columns:1fr;gap:12px}.repair-loop-node{min-height:180px;padding:22px}.repair-loop-arrow{height:24px;transform:rotate(90deg)}}
+
 /* Desktop header safe area: long stage captions must never cover scene content. */
 @media(min-width:761px){
   .reasoning-canvas[data-stage="3"] .recall-routes,
@@ -232,6 +236,12 @@ body.lightbox-open{overflow:hidden}.lightbox[hidden]{display:none}.lightbox{posi
   .reasoning-canvas[data-stage="11"] .result-list,
   .reasoning-canvas[data-stage="11"] .reflection-cluster{min-height:500px!important}
 }
+
+/* Final scene override: show the repaired reasoning loop, not the old two-panel view. */
+.reasoning-canvas[data-stage="12"] .repair-loop{opacity:1!important;transform:none!important;pointer-events:auto!important;visibility:visible!important}
+.reasoning-canvas[data-stage="12"] .result-list,.reasoning-canvas[data-stage="12"] .reflection-cluster{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+@media(min-width:761px){.reasoning-canvas[data-stage="12"]{height:760px!important}.reasoning-canvas[data-stage="12"] .repair-loop{top:220px!important}}
+@media(max-width:760px){.reasoning-canvas[data-stage="12"]{height:1450px!important}}
 
 /* Stage 3: keep budget planning as a clean two-column scene.  The older
    SVG connectors were calculated from elements hidden by this storyboard,

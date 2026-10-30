@@ -144,7 +144,7 @@ const caseActions = [
   { button: 'Match Leaf Pattern', title: 'ERROR-NEED is selected', detail: 'The converted item is absent because a supported user need never entered the retrieval plan.' },
   { button: 'Generate Repair', title: 'ERROR-NEED-001 is matched', detail: 'The leaf pattern states: supporting evidence is present, but the corresponding need was omitted.' },
   { button: 'Re-run Recommendation', title: 'Repair reinserted into the pipeline', detail: 'The missing phone-rental need is added back to Need Agent output, and the Plan Agent reallocates retrieval budget for replay.' },
-  { button: 'Restart', title: 'Replay succeeds', detail: 'The repaired pipeline recalls the deposit-free phone-rental item and ranks it at position 23, verifying the repair.' }
+  { button: 'Restart', title: 'Reflection repair closes the loop', detail: 'The reflection node enters Working Memory, triggers Need Agent reasoning again, and the rerun returns the correct phone-rental result at Rank 23.' }
 ];
 
 const showCaseStep = (index) => {
