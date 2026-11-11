@@ -77,6 +77,19 @@ html body #reasoning-canvas[data-stage="4"].recall-complete .mosaic-ns{top:550px
 }
 @media(prefers-reduced-motion:reduce){.recall-mosaic,.recall-mosaic>div>span{animation:none!important}}
 </style>
+<style id="aligned-recall-rows">
+@media(min-width:761px){
+html body #reasoning-canvas[data-stage="4"] .recall-routes{left:3%!important;top:175px!important;width:36%!important;gap:24px!important}
+html body #reasoning-canvas[data-stage="4"] .route-card{height:230px!important;min-height:230px!important;box-sizing:border-box!important}
+html body #reasoning-canvas[data-stage="4"].recall-complete .recall-mosaic{left:45%!important;width:51%!important;top:175px!important;height:230px!important;padding:18px 22px!important;animation:none!important;overflow:visible!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+html body #reasoning-canvas[data-stage="4"].recall-complete .mosaic-ns{top:429px!important}
+html body #reasoning-canvas[data-stage="4"].recall-complete .recall-mosaic::before{content:"";position:absolute;left:-11.765%;width:11.765%;top:50%;height:2px;background:currentColor;opacity:.75}
+html body #reasoning-canvas[data-stage="4"].recall-complete .recall-mosaic::after{content:"";position:absolute;left:-8px;top:calc(50% - 5px);width:8px;height:8px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg)}
+html body #reasoning-canvas[data-stage="4"] .recall-mosaic>div{display:grid!important;grid-template-columns:repeat(8,minmax(0,22px))!important;grid-auto-rows:18px!important;justify-content:space-between!important;gap:6px!important;margin:12px 0!important;padding:0!important;min-height:0!important;flex:none!important}
+html body #reasoning-canvas[data-stage="4"] .recall-mosaic>div>span{display:block!important;width:18px!important;height:18px!important;min-height:0!important;margin:0!important;padding:0!important;border-radius:4px!important}
+html body #reasoning-canvas[data-stage="4"] .recall-mosaic>small{margin-top:auto!important}
+}
+</style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
