@@ -90,6 +90,36 @@ html body #reasoning-canvas[data-stage="4"] .recall-mosaic>div>span{display:bloc
 html body #reasoning-canvas[data-stage="4"] .recall-mosaic>small{margin-top:auto!important}
 }
 </style>
+<style id="complete-recall-layout">
+.complete-recall-flow{display:none}
+html body #reasoning-canvas[data-stage="4"].recall-complete .recall-routes,
+html body #reasoning-canvas[data-stage="4"].recall-complete .recall-mosaic,
+html body #reasoning-canvas[data-stage="4"].recall-complete .execution-flow{display:none!important}
+html body #reasoning-canvas[data-stage="4"].recall-complete .complete-recall-flow{display:grid!important;position:absolute;left:3%;right:3%;top:175px;grid-template-columns:minmax(0,36fr) minmax(32px,5fr) minmax(0,25fr) minmax(32px,5fr) minmax(0,29fr);align-items:stretch;font-family:Inter,Arial,sans-serif;color:#345a75}
+.complete-recall-flow *{box-sizing:border-box}
+.complete-routes{display:grid;gap:22px}
+.complete-recall-flow article{padding:20px;border:2px solid;border-radius:18px;min-width:0}
+.complete-bc{background:#edf6fc;border-color:#438fc1!important}
+.complete-ns{background:#eff9f2;border-color:#36a15e!important;color:#28764b}
+.complete-recall-flow h3{font:750 17px/1.4 Inter,Arial,sans-serif;margin:8px 0 14px}
+.complete-recall-flow small{font:650 11px/1.5 Inter,Arial,sans-serif}
+.complete-recall-flow strong{font:750 18px/1.4 Inter,Arial,sans-serif}
+.complete-recall-flow p{font:550 11px/1.5 Inter,Arial,sans-serif;margin:16px 0 0}
+.complete-tiles{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin:16px 0}
+.complete-tiles i{display:block;aspect-ratio:1;border-radius:4px}
+.complete-arrow{display:flex;align-items:center;justify-content:center;font:500 28px/1 Arial,sans-serif;color:#7a8c9d;padding:0 6px}
+.complete-merge{display:flex;flex-direction:column;justify-content:center;background:#f5f0fc;border-color:#8056bb!important;color:#694797;text-align:center}
+.complete-merge h3{text-transform:uppercase;font-size:13px}
+.complete-merge strong{font-size:23px}
+.complete-merge .complete-tiles{grid-template-columns:repeat(5,minmax(0,1fr));margin:24px 0 8px}
+.complete-rank{display:flex;flex-direction:column;justify-content:center;background:#fff7ed;border-color:#e5a05b!important;color:#985e2d;text-align:center}
+.complete-rank h3{text-transform:uppercase}
+.complete-rank>div{display:grid;gap:14px;margin:20px 0}
+.complete-rank b{display:flex;flex-direction:column;gap:8px;justify-content:center;min-height:94px;padding:15px 6px;background:white;border:1.5px solid #e5a05b;border-radius:14px;font-size:17px}
+.complete-rank>strong{font-size:13px;color:#28764b}
+#reasoning-canvas.pipeline-ranked .complete-merge,#reasoning-canvas.pipeline-ranked .complete-rank{box-shadow:0 8px 24px #6b598322}
+@media(max-width:760px){html body #reasoning-canvas[data-stage="4"].recall-complete{height:1650px!important}html body #reasoning-canvas[data-stage="4"].recall-complete .complete-recall-flow{top:180px;grid-template-columns:1fr;gap:16px}.complete-arrow{transform:rotate(90deg);height:25px}.complete-rank b{min-height:60px}.complete-tiles i{max-height:24px}.complete-routes{grid-template-columns:1fr 1fr;gap:12px}.complete-recall-flow article{padding:14px}.complete-recall-flow h3{font-size:15px}}
+</style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
@@ -145,7 +175,14 @@ html body #reasoning-canvas[data-stage="4"] .recall-mosaic>small{margin-top:auto
           </div>
           <div class="planner-node"><span>Planning Agent</span><b>Allocate · Select · Fuse</b><small>BC 60% · NS 40%</small></div>
           <div class="recall-mosaic mosaic-bc" aria-label="BC 1,800 recalled candidates"><b>1,800 recalled</b><div aria-hidden="true"><span style="--tile-delay:0ms"></span><span style="--tile-delay:14ms"></span><span style="--tile-delay:28ms"></span><span style="--tile-delay:42ms"></span><span style="--tile-delay:56ms"></span><span style="--tile-delay:70ms"></span><span style="--tile-delay:84ms"></span><span style="--tile-delay:98ms"></span><span style="--tile-delay:112ms"></span><span style="--tile-delay:126ms"></span><span style="--tile-delay:140ms"></span><span style="--tile-delay:154ms"></span><span style="--tile-delay:168ms"></span><span style="--tile-delay:182ms"></span><span style="--tile-delay:196ms"></span><span style="--tile-delay:210ms"></span><span style="--tile-delay:224ms"></span><span style="--tile-delay:238ms"></span><span style="--tile-delay:252ms"></span><span style="--tile-delay:266ms"></span><span style="--tile-delay:280ms"></span><span style="--tile-delay:294ms"></span><span style="--tile-delay:308ms"></span><span style="--tile-delay:322ms"></span><span style="--tile-delay:336ms"></span><span style="--tile-delay:350ms"></span><span style="--tile-delay:364ms"></span><span style="--tile-delay:378ms"></span><span style="--tile-delay:392ms"></span><span style="--tile-delay:406ms"></span><span style="--tile-delay:420ms"></span><span style="--tile-delay:434ms"></span><span style="--tile-delay:448ms"></span><span style="--tile-delay:462ms"></span><span style="--tile-delay:476ms"></span><span style="--tile-delay:490ms"></span><span style="--tile-delay:504ms"></span><span style="--tile-delay:518ms"></span><span style="--tile-delay:532ms"></span><span style="--tile-delay:546ms"></span></div><small>Illustrative candidate sample</small></div><div class="recall-mosaic mosaic-ns" aria-label="NS 1,200 recalled candidates"><b>1,200 recalled</b><div aria-hidden="true"><span style="--tile-delay:0ms"></span><span style="--tile-delay:14ms"></span><span style="--tile-delay:28ms"></span><span style="--tile-delay:42ms"></span><span style="--tile-delay:56ms"></span><span style="--tile-delay:70ms"></span><span style="--tile-delay:84ms"></span><span style="--tile-delay:98ms"></span><span style="--tile-delay:112ms"></span><span style="--tile-delay:126ms"></span><span style="--tile-delay:140ms"></span><span style="--tile-delay:154ms"></span><span style="--tile-delay:168ms"></span><span style="--tile-delay:182ms"></span><span style="--tile-delay:196ms"></span><span style="--tile-delay:210ms"></span><span style="--tile-delay:224ms"></span><span style="--tile-delay:238ms"></span><span style="--tile-delay:252ms"></span><span style="--tile-delay:266ms"></span><span style="--tile-delay:280ms"></span><span style="--tile-delay:294ms"></span><span style="--tile-delay:308ms"></span><span style="--tile-delay:322ms"></span><span style="--tile-delay:336ms"></span><span style="--tile-delay:350ms"></span><span style="--tile-delay:364ms"></span><span style="--tile-delay:378ms"></span><span style="--tile-delay:392ms"></span><span style="--tile-delay:406ms"></span><span style="--tile-delay:420ms"></span><span style="--tile-delay:434ms"></span></div><small>Illustrative candidate sample</small></div><div class="execution-flow" aria-label="Tool allocation, candidate merge, and ranking"><div class="execution-step tool-step"><span>Retrieval tool pool</span><div class="pool-slots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="assignment-paths" aria-hidden="true"><i></i><i></i><i></i></div><div class="tool-pool"><i class="tool-item-cf">Item-CF</i><i class="tool-user-cf">User-CF</i><i class="tool-embedding">Embedding</i><i class="tool-bm25">BM25</i><i class="tool-one-reason">OneReason</i><i class="tool-embedding-copy">Embedding</i></div></div><div class="execution-arrow">→</div><div class="execution-step merge-step"><span>Candidate merge</span><b>Snake-order interleaving</b><small>3,000 recalled · deduplicate lists</small></div><div class="execution-arrow">→</div><div class="execution-step rank-step"><span>Rank</span><div class="rankers"><i>Base <small>fixed</small></i><i>SASRec <small>α</small></i><i>Two-Tower <small>1−α</small></i></div></div></div>
-          <section class="retrieval-story" aria-label="Recalled candidates are fused and ranked">
+          <section class="complete-recall-flow" aria-label="Recall, merge and ranking pipeline">
+<div class="complete-routes"><article class="complete-bc"><small>ROUTE 01 · BC</small><h3>Behavior Continuation</h3><strong>1,800 recalled</strong><div class="complete-tiles" aria-hidden="true"><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i></div><p>Item-CF · User-CF · Embedding</p></article><article class="complete-ns"><small>ROUTE 02 · NS</small><h3>Need Satisfaction</h3><strong>1,200 recalled</strong><div class="complete-tiles" aria-hidden="true"><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i></div><p>Embedding · BM25 · OneReason</p></article></div>
+<div class="complete-arrow" aria-hidden="true">→</div>
+<article class="complete-merge"><h3>Merge &amp; deduplicate</h3><strong>3,000<br>candidates</strong><div class="complete-tiles" aria-hidden="true"><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i><i style="background:#82b7d8"></i><i style="background:#80c69c"></i><i style="background:#efa66c"></i><i style="background:#b39bd9"></i><i style="background:#a7cc79"></i></div><p>Snake-order fusion</p></article>
+<div class="complete-arrow" aria-hidden="true">→</div>
+<article class="complete-rank"><h3>Rank</h3><div><b>Base<small>fixed</small></b><b>SASRec<small>α</small></b><b>Two-Tower<small>1−α</small></b></div><strong>Top recommendations</strong></article>
+</section>
+<section class="retrieval-story" aria-label="Recalled candidates are fused and ranked">
             <div class="candidate-stream stream-bc"><header><span>BC</span><b>1,800 recalled</b></header><div class="candidate-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
             <div class="candidate-stream stream-ns"><header><span>NS</span><b>1,200 recalled</b></header><div class="candidate-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
             <div class="pipeline-chevron merge-chevron">→</div>
@@ -210,10 +247,13 @@ html body #reasoning-canvas[data-stage="4"] .recall-mosaic>small{margin-top:auto
   let assignmentTimer;
   let assigned = false;
   let recalled = false;
+  let ranked = false;
   const syncAssignment = () => {
     clearTimeout(assignmentTimer);
     assigned = false;
     recalled = false;
+    ranked = false;
+    reasoningCanvas.classList.remove('pipeline-ranked');
     reasoningCanvas.classList.remove('recall-complete');
     reasoningCanvas.classList.remove('allocation-started');
     if (reasoningCanvas.dataset.stage === '4') {
@@ -228,7 +268,9 @@ html body #reasoning-canvas[data-stage="4"] .recall-mosaic>small{margin-top:auto
     event.stopImmediatePropagation();
     if (caseTransitioning) return;
     if (recalled) {
-      showCaseStep(4);
+      if (ranked) { showCaseStep(5); return; }
+      ranked = true;
+      reasoningCanvas.classList.add('pipeline-ranked');
       caseStageCaption.innerHTML = '<b>Merge and rank recalled candidates</b><span>The two result sets are fused, deduplicated, and ranked.</span>';
       caseAction.innerHTML = 'View Results <span>→</span>';
       return;
