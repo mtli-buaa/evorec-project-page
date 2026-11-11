@@ -20,6 +20,17 @@
     html body .reasoning-canvas[data-stage="2"] .planner-node small{font-size:10px!important}
   }
   </style>
+<style id="tool-pool-layout-fix">
+/* Tool allocation: reserve separate rows for slots, title, and helper text. */
+@media(min-width:761px){
+html body .reasoning-canvas[data-stage="4"] .tool-step>span{height:174px!important;padding:0 20px 30px!important;line-height:24px!important;font-size:16px!important;letter-spacing:.08em!important;border-width:2px!important;border-color:#bac7d2!important;background:#f7f9fc!important}
+html body .reasoning-canvas[data-stage="4"] .tool-step>span::after{bottom:6px!important;top:auto!important;line-height:18px!important;font-size:12px!important;letter-spacing:0!important;font-weight:500!important}
+html body .reasoning-canvas[data-stage="4"] .pool-slots{top:746px!important;bottom:auto!important;left:7%!important;right:10%!important;height:64px!important;padding:0!important;gap:0!important;grid-template-columns:repeat(5,1fr)!important}
+html body .reasoning-canvas[data-stage="4"] .pool-slots i{min-height:0!important;height:64px!important;width:84%!important;padding:0!important;border:1px dashed #c4ced8!important;box-shadow:none!important}
+html body .reasoning-canvas[data-stage="4"] .execution-arrow{display:none!important}
+html body .reasoning-canvas[data-stage="4"] .tool-pool i{font-family:Inter,Arial,sans-serif!important;box-shadow:0 6px 18px #24384b12!important}
+}
+</style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
