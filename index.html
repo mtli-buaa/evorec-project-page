@@ -120,6 +120,23 @@ html body #reasoning-canvas[data-stage="4"].recall-complete .complete-recall-flo
 #reasoning-canvas.pipeline-ranked .complete-merge,#reasoning-canvas.pipeline-ranked .complete-rank{box-shadow:0 8px 24px #6b598322}
 @media(max-width:760px){html body #reasoning-canvas[data-stage="4"].recall-complete{height:1650px!important}html body #reasoning-canvas[data-stage="4"].recall-complete .complete-recall-flow{top:180px;grid-template-columns:1fr;gap:16px}.complete-arrow{transform:rotate(90deg);height:25px}.complete-rank b{min-height:60px}.complete-tiles i{max-height:24px}.complete-routes{grid-template-columns:1fr 1fr;gap:12px}.complete-recall-flow article{padding:14px}.complete-recall-flow h3{font-size:15px}}
 </style>
+<style id="stable-case-study-height">
+/* One stage size per viewport, independent of scene and animation state. */
+html body #case-flow #reasoning-canvas.reasoning-canvas{
+--case-stage-height:980px;
+height:var(--case-stage-height)!important;
+min-height:var(--case-stage-height)!important;
+max-height:var(--case-stage-height)!important;
+box-sizing:border-box!important;
+flex:none!important;
+transition-property:background-color,opacity!important;
+overflow:auto!important;
+overflow-anchor:none;
+}
+@media(max-width:900px){
+html body #case-flow #reasoning-canvas.reasoning-canvas{--case-stage-height:1650px}
+}
+</style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
